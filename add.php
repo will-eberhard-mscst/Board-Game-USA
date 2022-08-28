@@ -62,15 +62,84 @@ foreach($categories as $cat){
     $cat_options .= "<option value='$id'><strong>$name</strong> - $desc</option>";
 }
 
+
+/*
+Add a Bonus tag:
+*/
+function AddBonus($bonus_no){
+    global $cat_options;
+
+    return "
+    <div class='bonus'>
+        <div><label>Bonus #$bonus_no</label></div>
+        <div><label for='bonuses[$bonus_no][id]'>Category</label></div>
+        <div>
+            <select class='chosen-select' name='bonuses[0][id]'>
+                $cat_options
+            </select>
+        </div>
+
+        <div><label for='bonuses[$bonus_no][points]'>Points</label></div>
+        <div><input type='number' name='bonuses[0][points]' value='0'></div>
+    </div>
+    <hr>
+    ";
+}
+
+/*
+Add a Smear tag:
+*/
+function AddSmear($no){
+    global $cat_options;
+
+    return "
+    <div class='smear'>
+        <div><label>Smear #$no</label></div>
+        <div><label for='smears[$no][id]'>Category</label></div>
+        <div>
+            <select class='chosen-select' name='smears[$no][id]'>
+                $cat_options
+            </select>
+        </div>
+
+        <div><label for='smears[$no][points]''>Points</label></div>
+        <div><input type='number' name='smears[$no][points]' value='0'></div>
+    </div>
+    <hr>
+    ";
+}
+
+/*
+AJAX:
+Get the function name that is trying to be called:
+*/
+if(isset($_POST['functionname'])){
+
+    $func = $_POST['functionname'];
+
+    switch($func){
+        case 'AddBonus':
+            echo AddBonus($_POST['data']);
+            break;
+
+        case 'AddSmear':
+            echo AddSmear($_POST['data']);
+            break;
+    }
+
+    exit;
+}
+
 ?>
 
-<body>
-    <div>
-        <h2 class="alert alert-success">Create Cards</h2>
+
+<div class='create'>
+    <div class='container'>
+        <h2 class="alert alert-primary">Create Cards</h2>
 
         <form method='post'>
 
-            <p>Select the card type:</p>
+            <div><label>Select the card type:</label></div>
             <div>
                 <input type="radio" name="card_type" id="position" value="Position" checked>
                 <label for="position">Position</label>
@@ -79,44 +148,33 @@ foreach($categories as $cat){
             </div>
 
             <div><label for="text">Text</label></div>
-            <div><input type='text' name='text'></div>
+            <div><textarea name='text'></textarea></div>
+
             
-            <div><label for="bonuses">Bonuses</label></div>
+            <div><h3 class='heading'>Bonuses</h3></div>
 
-            <div class='container'>
-                <div><label for="bonuses[0][id]">Category</label></div>
-                <div>
-                    <select name='bonuses[0][id]'>
-                        <?=$cat_options?>
-                    </select>
+            <div class='container inner'>
+                <div id='bonuses'>
+                    <?=AddBonus(0)?>
                 </div>
+                <div><input type='button' value='Add More' class='btn btn-primary' onclick='AddBonus()'></div>
+            </div>
+            
 
-                <div><label for="bonuses[0][points]">Points</label></div>
-                <div><input type='number' name='bonuses[0][points]' value='0'></div>
+            <div><h3 class='heading'>Smears</h3></div>
 
-                <div><input type='button' value='Add More'></div>
+            <div class='container inner'>
+                <div id='smears'>
+                    <?=AddSmear(0)?>
+                </div>
+                <div><input type='button' value='Add More' class='btn btn-primary' onclick='AddSmear()'></div>
             </div>
 
 
-            <div><label for="smears">Smears</label></div>
-
-            <div class='container'>
-                <div><label for="smears[0][id]">Category</label></div>
-                <div>
-                    <select name='smears[0][id]'>
-                        <?=$cat_options?>
-                    </select>
-                </div>
-
-                <div><label for="smears[0][points]">Points</label></div>
-                <div><input type='number' name='smears[0][points]' value='0'></div>
-
-                <div><input type='button' value='Add More'></div>
-            </div>
-
-
-            <div><input type="submit" value="Submit"></div>
+            <div><input type="submit" value="Submit" class='btn btn-success'></div>
 
         </form>
     </div>
-</body>
+</div>
+
+

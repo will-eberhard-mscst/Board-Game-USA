@@ -64,3 +64,34 @@ a.navbar-brand {
     line-height: 60px;
   }
   
+
+  
+
+  label{
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  h3[class='heading']{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  input, select, h2, textarea{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  input[type='text'], input[type='number'], input[type='button'], input[type='submit'], select, textarea{
+    width: 100%;
+  }
+
+  .create .container{
+    border: solid black 1px;
+    border-radius: 10px;
+  }
+
+  .inner{
+    background-color: rgb(237, 246, 248);
+  }
