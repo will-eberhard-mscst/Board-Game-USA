@@ -15,7 +15,8 @@ function AddBonus(){
         url: 'add.php',
         data: {
                 'functionname': 'AddBonus',
-                'data': ++bonus_no
+                'data0': 0,
+                'data1': ++bonus_no
             },
 
         success: function (obj, textstatus) {
@@ -47,7 +48,8 @@ function AddSmear(){
         url: 'add.php',
         data: {
                 'functionname': 'AddSmear',
-                'data': ++smear_no
+                'data0': 0,
+                'data1': ++smear_no
             },
 
         success: function (obj, textstatus) {

@@ -83,8 +83,12 @@ a.navbar-brand {
     margin-bottom: 10px;
   }
 
-  input[type='text'], input[type='number'], input[type='button'], input[type='submit'], select, textarea{
+  input[type='text'], input[type='button'], input[type='submit'], select, textarea{
     width: 100%;
+  }
+
+  input[type='number']{
+    max-width: 50px;
   }
 
   .create .container{
