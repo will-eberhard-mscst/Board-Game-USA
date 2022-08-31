@@ -6,25 +6,28 @@ $(".chosen-select").chosen({
 /*
 Add a Bonus
 */
-var bonus_no = 0;
+var bonus_nos = [];
 
-function AddBonus(){
+function AddBonus(position_no){
+
+    //Set the initial bonus_nos array value if it is undefined.
+    bonus_nos[position_no] = bonus_nos[position_no] === undefined ?  0 : bonus_nos[position_no];
     
     $.ajax({
         type: "POST",
         url: 'add.php',
         data: {
                 'functionname': 'AddBonus',
-                'data0': 0,
-                'data1': ++bonus_no
+                'data0': position_no,
+                'data1': ++bonus_nos[position_no]
             },
 
         success: function (obj, textstatus) {
             console.log(textstatus);
 
-            var elm = $('#bonuses');
+            var elm = $('#bonuses'+position_no+'');
 
-            if(textstatus = 'success'){
+            if(textstatus == 'success'){
                 elm.append(obj);
                 //chosen must be called again to apply it to the dropdown menu.
                 $(".chosen-select").chosen();
@@ -39,25 +42,28 @@ function AddBonus(){
 /*
 Add a Smear
 */
-var smear_no = 0;
+var smear_nos = [];
 
-function AddSmear(){
+function AddSmear(position_no){
+
+    //Set the initial smear_nos array value if it is undefined.
+    smear_nos[position_no] = smear_nos[position_no] === undefined ?  0 : smear_nos[position_no];
     
     $.ajax({
         type: "POST",
         url: 'add.php',
         data: {
                 'functionname': 'AddSmear',
-                'data0': 0,
-                'data1': ++smear_no
+                'data0': position_no,
+                'data1': ++smear_nos[position_no]
             },
 
         success: function (obj, textstatus) {
             console.log(textstatus);
 
-            var elm = $('#smears');
+            var elm = $('#smears'+position_no+'');
 
-            if(textstatus = 'success'){
+            if(textstatus == 'success'){
                 elm.append(obj);
                 $(".chosen-select").chosen();
             }
@@ -67,3 +73,85 @@ function AddSmear(){
         }
     });
 }
+
+
+/*
+Call the add position function from PHP
+*/
+function AddPosition(position_no){
+
+    $.ajax({
+        type: "POST",
+        url: 'add.php',
+        data: {
+                'functionname': 'AddPosition',
+                'data0': position_no
+            },
+
+        success: function (obj, textstatus) {
+            console.log(textstatus);
+
+            var elm = $('#positions');
+
+            var success = textstatus == 'success'
+
+            if(success){
+                elm.append(obj);
+                $(".chosen-select").chosen();
+                //console.log(obj);
+            }
+            else{
+                elm.append("<p class='alert alert-danger'>An error occured</p>");
+            }
+
+            return success;
+        }
+    });
+}
+
+/*
+Check if the Question Radio Button is clicked:
+*/
+$('#question').click(function() {
+    if($('#question').is(':checked')) { 
+
+        //Clear these arrays:
+        bonus_nos = [];
+        smear_nos = [];
+
+        //Reveal the Question Text.
+        $('#question_text').removeAttr('hidden');
+
+        //Clear all the elements within the position tag.
+        var pos = $('#positions');
+        pos.empty();
+
+        //Add 3 Positions:
+        AddPosition(0);
+        AddPosition(1);
+        AddPosition(2);      
+        
+    }
+ });
+
+ /*
+ Check if the Position Radio Button is clicked:
+ */
+ $('#position').click(function() {
+    if($('#position').is(':checked')) { 
+
+        //Clear these arrays:
+        bonus_nos = [];
+        smear_nos = [];
+
+        //Reveal the Question Text.
+        $('#question_text').attr('hidden', true);
+
+        //Clear all the elements within the position tag.
+        var pos = $('#positions');
+        pos.empty();
+
+        //Add 1 Position:
+        AddPosition(0);
+    }
+ });

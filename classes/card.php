@@ -5,10 +5,12 @@ require('category.php');
     - text
 */
 class Card{
+    public $uid;
     public $text;
 
-    function __construct($text)
+    function __construct($uid, $text)
     {
+        $this->uid = $uid;
         $this->text = $text;
     }
 }
@@ -22,9 +24,9 @@ class Position extends Card{
     public $bonuses = array();
     public $smears = array();
     
-    function __construct($text)
+    function __construct($uid, $text)
     {
-        parent::__construct($text);
+        parent::__construct($uid, $text);
     }
 
     function AddBonus($id, $points){
@@ -43,9 +45,9 @@ class Position extends Card{
 class Question extends Card{
     public $answers = array();
 
-    function __construct($text)
+    function __construct($uid, $text)
     {
-        parent::__construct($text);
+        parent::__construct($uid, $text);
     }
 
     //Pass in a Position object.
