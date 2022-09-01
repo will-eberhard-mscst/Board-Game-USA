@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+require('classes/card.php');
+?>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +27,7 @@
                             <a class="nav-link text-dark" href='?page=add'>Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href='?page=add'>View</a>
+                            <a class="nav-link text-dark" href='?page=album'>Album</a>
                         </li>
                     </ul>
                 </div>

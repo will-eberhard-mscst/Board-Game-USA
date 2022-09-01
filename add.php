@@ -1,5 +1,4 @@
 <?php
-require('classes/card.php');
 /*
 Date: 8/27/2022
 
@@ -128,7 +127,7 @@ function AddPosition($position_no){
     <div class='position'>
         <div><h2 class='heading'>Position #$position_no</h2></div>
 
-        <div class='container inner'>
+        <div class='container outer'>
             <div><label for='text[$position_no]'>Text</label></div>
             <div><textarea name='text[$position_no]'></textarea></div>
             
@@ -138,7 +137,7 @@ function AddPosition($position_no){
                 <div id='bonuses$position_no'>
                     " . AddBonus($position_no, 0) ."
                 </div>
-                <div><input type='button' value='Add More' class='btn btn-primary' onclick='AddBonus($position_no)'></div>
+                <div><input type='button' value='Add More' class='btn btn-primary long' onclick='AddBonus($position_no)'></div>
             </div>
             
 
@@ -148,7 +147,7 @@ function AddPosition($position_no){
                 <div id='smears$position_no'>
                     ". AddSmear($position_no, 0) ."
                 </div>
-                <div><input type='button' value='Add More' class='btn btn-primary' onclick='AddSmear($position_no)'></div>
+                <div><input type='button' value='Add More' class='btn btn-primary long' onclick='AddSmear($position_no)'></div>
             </div>
         </div>  
     </div>
@@ -318,7 +317,7 @@ if(isset($_POST["submit"]))
             </div>
 
 
-            <div><input type="submit" name='submit' value="Submit" class='btn btn-success'></div>
+            <div><input type="submit" name='submit' value="Submit" class='btn btn-success long'></div>
 
         </form>
     </div>

@@ -66,7 +66,7 @@ a.navbar-brand {
   
 
   
-
+  /* Add / Create card page. */
   label{
     font-weight: bold;
     margin-top: 5px;
@@ -78,12 +78,12 @@ a.navbar-brand {
     margin-bottom: 10px;
   }
 
-  input, select, h2, textarea{
+  .create input, select, h2, textarea{
     margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  input[type='text'], input[type='button'], input[type='submit'], select, textarea{
+  input[type='text'], input[type='button'].long, input[type='submit'], select, textarea{
     width: 100%;
   }
 
@@ -94,8 +94,41 @@ a.navbar-brand {
   .create .container{
     border: solid black 1px;
     border-radius: 10px;
+    padding-bottom: 10px;
   }
+  
 
   .inner{
+    background-color: rgb(205, 237, 245);
+  }
+
+  .outer{
     background-color: rgb(237, 246, 248);
+  }
+
+  /* Album page: */
+  .album{
+    border: solid black 1px;
+    border-radius: 10px;
+    padding-bottom: 10px;
+  }
+
+  .pos-card{
+    background-color: rgb(228, 241, 204);
+    border-radius: 5px;
+    margin: 5px;
+  }
+
+  .pos-card div, .que-card div{
+    padding: 1px;
+  }
+
+  .que-card, .que-card .pos-card{
+    background-color: rgb(204, 209, 241);
+    border-radius: 5px;
+    margin: 5px;
+  }
+
+  .short{
+    width: 80px;
   }
