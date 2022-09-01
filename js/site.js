@@ -1,4 +1,6 @@
-
+/*
+JS for add.php------------------------------------------------------------
+*/
 $(".chosen-select").chosen({
     
 });
@@ -155,3 +157,46 @@ $('#question').click(function() {
         AddPosition(0);
     }
  });
+
+
+ /*
+ -----------------------------------------album.php JS -------------------------------------------------
+ */
+/*
+Delete a Card permanently
+*/
+function DeleteCard(uid, card_type){
+
+    if(confirm("Are you sure you want to delete this card?")){
+
+        $.ajax({
+            type: "POST",
+            url: 'album.php',
+            data: {
+                    'functionname': 'DeleteCard',
+                    'data0': uid,
+                    'data1': card_type
+                },
+
+            success: function (obj, textstatus) {
+                console.log(textstatus);
+
+                var elm = $('#'+ uid +'');
+
+                var success = textstatus == 'success'
+
+                if(success && obj){
+                    //delete the card element.
+                    elm.empty();
+
+                    console.log(obj);
+                }
+                else{
+                    elm.append("<p class='alert alert-danger'>An error occured</p>");
+                }
+
+                return success;
+            }
+        });
+    }
+}
