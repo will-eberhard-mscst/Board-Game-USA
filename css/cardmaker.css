@@ -64,7 +64,14 @@ a.navbar-brand {
     line-height: 60px;
   }
   
+  /*Makeshift dark mode*/
+  body {
+    background-color: rgb(31, 4, 82);
+  }
 
+  .create, .album{
+    background-color: rgb(98, 78, 136);
+  }
   
   /* Add / Create card page. */
   label{

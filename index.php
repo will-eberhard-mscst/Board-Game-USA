@@ -13,6 +13,10 @@ require('classes/card.php');
     <link rel="stylesheet" href="css/cardmaker.css" />
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../utils/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../utils/chosen/chosen.jquery.min.js"></script>
+    
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -49,9 +53,7 @@ require('classes/card.php');
         </div>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../utils/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../utils/chosen/chosen.jquery.min.js"></script>
+    
     <script src="js/site.js"></script>
 
 </body>

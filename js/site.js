@@ -17,7 +17,7 @@ function AddBonus(position_no){
     
     $.ajax({
         type: "POST",
-        url: 'add.php',
+        url: 'utils.php',
         data: {
                 'functionname': 'AddBonus',
                 'data0': position_no,
@@ -53,7 +53,7 @@ function AddSmear(position_no){
     
     $.ajax({
         type: "POST",
-        url: 'add.php',
+        url: 'utils.php',
         data: {
                 'functionname': 'AddSmear',
                 'data0': position_no,
@@ -84,7 +84,7 @@ function AddPosition(position_no){
 
     $.ajax({
         type: "POST",
-        url: 'add.php',
+        url: 'utils.php',
         data: {
                 'functionname': 'AddPosition',
                 'data0': position_no
