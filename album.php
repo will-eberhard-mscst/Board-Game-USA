@@ -161,7 +161,7 @@ function DrawPosCard($pos, bool $delete = true, $question_letter = ""){
         echo "
         <div>
             <input type='button' value='Delete' class='btn btn-danger short' onclick='DeleteCard($uid, 0)'>
-            <input type='button' value='Edit' class='btn btn-success short' onclick=''>
+            <a class='btn btn-success short' href='?page=add&uid=$uid'>Edit</a>
         </div>
         ";
     }
@@ -195,7 +195,7 @@ function DrawQuestionCard($question){
     echo "
         <div>
             <input type='button' value='Delete' class='btn btn-danger short' onclick='DeleteCard($uid, 1)'>
-            <input type='button' value='Edit' class='btn btn-success short' onclick=''>
+            <a class='btn btn-success short' href='?page=add&uid=$uid'>Edit</a>
         </div>
         ";
 

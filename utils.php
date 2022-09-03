@@ -16,24 +16,52 @@ $json_data = json_decode($json);
 
 
 $lang = $json_data->eng;
-$categories = $lang->categories;
 
-$cat_options = "";
 
-foreach($categories as $cat){
-    $id = $cat->id;
-    $name = $cat->name;
-    $desc = $cat->desc;
 
-    $cat_options .= "<option value='$id'><strong>$name</strong> - $desc</option>";
+/*
+Returns the Categories and sets one as the Selected option.
+If no cat_id is entered, none will be selected.
+*/
+function GetCategories($cat_id = ""){
+    global $lang;
+
+    $categories = $lang->categories;
+
+    $cat_options = "";
+
+    foreach($categories as $cat){
+        $id = $cat->id;
+        $name = $cat->name;
+        $desc = $cat->desc;
+
+        //select the cat_id
+        $selected = "";
+        if($cat_id == $id){
+            $selected = "selected";
+        }
+
+        $cat_options .= "<option value='$id' $selected><strong>$name</strong> - $desc</option>";
+    }
+
+    return $cat_options;
 }
 
 
 /*
 Add a Bonus tag:
 */
-function AddBonus($position_no, $bonus_no){
-    global $cat_options;
+function AddBonus($position_no, $bonus_no, stdclass $bonus = null){
+    
+    $cat_id = "";
+    $points = 0;
+
+    if($bonus){
+        $cat_id = $bonus->id;
+        $points = $bonus->points;
+    }
+
+    $cat_options = GetCategories($cat_id);
 
     return "
     <div class='bonus'>
@@ -46,7 +74,7 @@ function AddBonus($position_no, $bonus_no){
         </div>
 
         <div><label for='bonuses[$position_no][$bonus_no][points]'>Points</label></div>
-        <div><input type='number' name='bonuses[$position_no][$bonus_no][points]' value='0'></div>
+        <div><input type='number' name='bonuses[$position_no][$bonus_no][points]' value='$points'></div>
     </div>
     <hr>
     ";
@@ -55,8 +83,17 @@ function AddBonus($position_no, $bonus_no){
 /*
 Add a Smear tag:
 */
-function AddSmear($position_no, $smear_no){
-    global $cat_options;
+function AddSmear($position_no, $smear_no, stdclass $smear = null){
+
+    $cat_id = "";
+    $points = 0;
+
+    if($smear){
+        $cat_id = $smear->id;
+        $points = $smear->points;
+    }
+
+    $cat_options = GetCategories($cat_id);
 
     return "
     <div class='smear'>
@@ -69,7 +106,7 @@ function AddSmear($position_no, $smear_no){
         </div>
 
         <div><label for='smears[$position_no][$smear_no][points]''>Points</label></div>
-        <div><input type='number' name='smears[$position_no][$smear_no][points]' value='0'></div>
+        <div><input type='number' name='smears[$position_no][$smear_no][points]' value='$points'></div>
     </div>
     <hr>
     ";
@@ -78,7 +115,32 @@ function AddSmear($position_no, $smear_no){
 /*
 Add a Position tag:
 */
-function AddPosition($position_no){
+function AddPosition(int $position_no, stdclass $position_card = null){
+
+    $text = "";
+    $bonus_tags = "";
+    $smear_tags = "";
+
+    /*
+    If we have a valid Position card, set all the default field values.
+    */
+    if($position_card){
+        $text = $position_card->text;
+        
+        $i = 0;
+        foreach($position_card->bonuses as $bonus){
+            $bonus_tags .= AddBonus($position_no, $i++, $bonus);
+        }
+
+        $i = 0;
+        foreach($position_card->smears as $smear){
+            $smear_tags .= AddSmear($position_no, $i++, $smear);
+        }
+    }
+    else{
+        $bonus_tags = AddBonus($position_no, 0);
+        $smear_tags = AddSmear($position_no, 0);
+    }
 
     $tag ="
     <div class='position'>
@@ -86,13 +148,13 @@ function AddPosition($position_no){
 
         <div class='container outer'>
             <div><label for='text[$position_no]'>Text</label></div>
-            <div><textarea name='text[$position_no]'></textarea></div>
+            <div><textarea name='text[$position_no]'>$text</textarea></div>
             
             <div><h3 class='heading'>Bonuses</h3></div>
 
             <div class='container inner'>
                 <div id='bonuses$position_no'>
-                    " . AddBonus($position_no, 0) ."
+                    " . $bonus_tags ."
                 </div>
                 <div><input type='button' value='Add More' class='btn btn-primary long' onclick='AddBonus($position_no)'></div>
             </div>
@@ -102,7 +164,7 @@ function AddPosition($position_no){
 
             <div class='container inner'>
                 <div id='smears$position_no'>
-                    ". AddSmear($position_no, 0) ."
+                    ". $smear_tags ."
                 </div>
                 <div><input type='button' value='Add More' class='btn btn-primary long' onclick='AddSmear($position_no)'></div>
             </div>

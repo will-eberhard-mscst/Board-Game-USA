@@ -13,6 +13,7 @@ var bonus_nos = [];
 function AddBonus(position_no){
 
     //Set the initial bonus_nos array value if it is undefined.
+    //Try getting the number by counting the number of Bonus Tags under this Position currently
     bonus_nos[position_no] = bonus_nos[position_no] === undefined ?  0 : bonus_nos[position_no];
     
     $.ajax({

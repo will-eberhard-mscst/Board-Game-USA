@@ -2,9 +2,10 @@
 /*
 DATE: 9/2/2022
 
--   uid will be a parameter. Without a UID, this page is useless.
--   All the current values will be set as the default values.
+DONE -   uid will be a parameter. Without a UID, this page is useless.
+DONE -   All the current values will be set as the default values.
 -   On submit, delete all current positions, smears, and bonuses and submit the new card as is.
+-   There is a bug when adding new Bonuses or Smears where the number starts at 0 even if there are defaulted bonuses or smears.
 */
 
 
