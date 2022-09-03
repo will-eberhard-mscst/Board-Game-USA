@@ -200,3 +200,11 @@ function DeleteCard(uid, card_type){
         });
     }
 }
+
+/*
+--------------------------------stats.php---------------------------
+*/
+
+$('.stats').dataTable({
+    paging: false
+});

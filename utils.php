@@ -12,9 +12,6 @@ $json_data = json_decode($json);
 
 // Display data
 //echo "<pre><code>" . print_r($json_data) . "</code></pre>";
-
-
-
 $lang = $json_data->eng;
 
 
@@ -130,6 +127,11 @@ function AddPosition(int $position_no, $position_card = null){
         $i = 0;
         foreach($position_card->bonuses as $bonus){
             $bonus_tags .= AddBonus($position_no, $i++, $bonus);
+        }
+
+        //if Smears are not set, create an empty array.
+        if(!isset($position_card->smears)){
+            $position_card->smears = array();
         }
 
         $i = 0;

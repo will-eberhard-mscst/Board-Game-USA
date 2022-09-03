@@ -19,4 +19,50 @@ class Category{
 
 }
 
+/*
+Stores the id, number of occurances, and the sum of all the points.
+*/
+class Total{
+    public $id;
+    public $count;
+    public $sum = 0;
+
+    function __construct($id)
+    {
+        $this->id = $id;
+    }
+
+    //Increase the Count by 1
+    function Count(){
+        $this->count++;
+    }
+
+    //Add this value to the sum.
+    function AddToSum($value){
+        $this->sum += $value;
+    }
+}
+
+/*
+Stores the totals of each Category.
+That includes the Total count of Plus and Minus cards for this category for both Bonuses and Smears.
+*/
+class CategoryTotal{
+    public $BonusTotalPlus;
+    public $BonusTotalMinus;
+    public $SmearTotalPlus;
+    public $SmearTotalMinus;
+
+    function __construct($id)
+    {
+        $this->BonusTotalPlus = new Total($id);
+        $this->BonusTotalMinus = new Total($id);
+        $this->SmearTotalPlus = new Total($id);
+        $this->SmearTotalMinus = new Total($id);
+    }
+
+
+
+}
+
 ?>

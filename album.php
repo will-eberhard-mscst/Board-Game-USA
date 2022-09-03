@@ -18,11 +18,7 @@ $json = file_get_contents($json_filepath);
 
 // Decode the JSON file
 $json_data = json_decode($json, true);
-
-
-
 $lang = $json_data['eng'];
-$categories = $lang['categories'];
 
 //echo "<pre><code>" . print_r($categories) . "</code></pre>";
 
@@ -50,7 +46,8 @@ if(isset($_POST['functionname'])){
 Returns the Name of the Category given the ID.
 */
 function GetCategoryName($id){
-    global $categories;
+    global $lang;
+    $categories = $categories = $lang['categories'];
 
     foreach($categories as $cat){
         if($cat['id'] == $id){
@@ -213,6 +210,9 @@ function DrawQuestionCard($question){
         <div class='container'>
             
             <h3>Positions:</h3>
+            <div class='container totals'>
+                <div><strong>Total count:</strong> <?=count($lang['positions'])?></div>
+            </div>
             <?php
             foreach($lang['positions'] as $pos)
             {
@@ -221,6 +221,7 @@ function DrawQuestionCard($question){
             ?>
 
             <h3>Questions:</h3>
+            <div>Total count: <?=count($lang['questions'])?></div>
             <?php
             foreach($lang['questions'] as $que)
             {
