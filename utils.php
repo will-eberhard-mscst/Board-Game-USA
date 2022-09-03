@@ -51,7 +51,7 @@ function GetCategories($cat_id = ""){
 /*
 Add a Bonus tag:
 */
-function AddBonus($position_no, $bonus_no, stdclass $bonus = null){
+function AddBonus($position_no, $bonus_no, $bonus = null){
     
     $cat_id = "";
     $points = 0;
@@ -64,7 +64,7 @@ function AddBonus($position_no, $bonus_no, stdclass $bonus = null){
     $cat_options = GetCategories($cat_id);
 
     return "
-    <div class='bonus'>
+    <div class='bonus bonus$position_no'>
         <div><label>Bonus #$bonus_no</label></div>
         <div><label for='bonuses[$position_no][$bonus_no][id]'>Category</label></div>
         <div>
@@ -83,7 +83,7 @@ function AddBonus($position_no, $bonus_no, stdclass $bonus = null){
 /*
 Add a Smear tag:
 */
-function AddSmear($position_no, $smear_no, stdclass $smear = null){
+function AddSmear($position_no, $smear_no, $smear = null){
 
     $cat_id = "";
     $points = 0;
@@ -96,7 +96,7 @@ function AddSmear($position_no, $smear_no, stdclass $smear = null){
     $cat_options = GetCategories($cat_id);
 
     return "
-    <div class='smear'>
+    <div class='smear smear$position_no'>
         <div><label>Smear #$smear_no</label></div>
         <div><label for='smears[$position_no][$smear_no][id]'>Category</label></div>
         <div>
@@ -115,7 +115,7 @@ function AddSmear($position_no, $smear_no, stdclass $smear = null){
 /*
 Add a Position tag:
 */
-function AddPosition(int $position_no, stdclass $position_card = null){
+function AddPosition(int $position_no, $position_card = null){
 
     $text = "";
     $bonus_tags = "";
@@ -135,6 +135,16 @@ function AddPosition(int $position_no, stdclass $position_card = null){
         $i = 0;
         foreach($position_card->smears as $smear){
             $smear_tags .= AddSmear($position_no, $i++, $smear);
+        }
+
+        /*
+        If either of these have 0 entries, create at least one empty Bonus or Smear.
+        */
+        if(count($position_card->bonuses) == 0){
+            $bonus_tags = AddBonus($position_no, 0);
+        }
+        if(count($position_card->smears) == 0){
+            $smear_tags = AddSmear($position_no, 0);
         }
     }
     else{

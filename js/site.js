@@ -12,9 +12,8 @@ var bonus_nos = [];
 
 function AddBonus(position_no){
 
-    //Set the initial bonus_nos array value if it is undefined.
     //Try getting the number by counting the number of Bonus Tags under this Position currently
-    bonus_nos[position_no] = bonus_nos[position_no] === undefined ?  0 : bonus_nos[position_no];
+    bonus_nos[position_no] = $(".bonus"+ position_no).length - 1;
     
     $.ajax({
         type: "POST",
@@ -49,8 +48,8 @@ var smear_nos = [];
 
 function AddSmear(position_no){
 
-    //Set the initial smear_nos array value if it is undefined.
-    smear_nos[position_no] = smear_nos[position_no] === undefined ?  0 : smear_nos[position_no];
+    //Try getting the number by counting the number of Bonus Tags under this Position currently
+    smear_nos[position_no] = $(".smear"+ position_no).length - 1;
     
     $.ajax({
         type: "POST",

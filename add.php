@@ -44,7 +44,14 @@ DONE -   Add Question cards with
             -   Button to add more smears
         -   Button to Add more Positions
 
+
+DATE: 9/2/2022
 -   Use this same page to Edit existing Cards.
+
+DONE -   uid will be a parameter. Without a UID, this page is useless.
+DONE -   All the current values will be set as the default values.
+-   On submit, delete all current positions, smears, and bonuses and submit the new card as is.
+-   There is a bug when adding new Bonuses or Smears where the number starts at 0 even if there are defaulted bonuses or smears.
 */
 
 /*
@@ -118,21 +125,26 @@ Add to JSON file:
 if(isset($_POST["submit"]))
 {
     $card_type = $_POST["card_type"];
-
-
+    
     /*
     Get the last Card uid
     The uid is unique to every card and position.
     */
     $uid = $json_data->card_uid_counter;
 
+    //Whatever the uid is now is our card's uid.
+    $card_uid = $uid;    
+    
+
     //Array that contains the type of card we want to upload:
     $array;
+    $delete_array;
 
     //Select the card array to get based on the card type.
     switch($card_type){
         case "Position":
             $array = $lang->positions;
+            $delete_array = $array;
             break;
         
         case "Question":
@@ -147,6 +159,7 @@ if(isset($_POST["submit"]))
 
             //We will use the Answers array to get the positions in this case:
             $array = $question->answers;
+            $delete_array = $lang->questions;
             break;
     }
     
@@ -158,7 +171,36 @@ if(isset($_POST["submit"]))
         echo "<div class='alert alert-danger'>ERROR: You didn't enter any text, bonuses or Smears.</div>";
         exit;
     }
+
+    /*
+    If this is an edit, find the old card UID, then remove it from the file.
+    */
+    if($isEdit){
+
+        $i = 0;
+        foreach($delete_array as $obj)
+        {
+            if($obj->uid == $_GET['uid']){
+                //remove from the array.
+                array_splice($delete_array, $i, 1);
+
+                //update the JSON file.
+                if($card_type == "Position"){
+                    $json_data->eng->positions = $delete_array;
+                    //Update the array for adding new positions.
+                    $array = $delete_array;
+                    break;
+                }
+                else if($card_type == "Question"){
+                    $json_data->eng->questions = $delete_array;
+                    break;
+                }
+            }
+            $i++;
+        }
+    }
    
+
     //Each text is an indicator of how many Positions exist.
     $i = 0;
     foreach($_POST["text"] as $text){
@@ -184,6 +226,8 @@ if(isset($_POST["submit"]))
         $i++;
     }
 
+    
+
     //Update the uid counter:
     $json_data->card_uid_counter = $uid;
 
@@ -205,17 +249,25 @@ if(isset($_POST["submit"]))
     $new_json = json_encode($json_data);
 
     //Update the Json file.
-    if (file_put_contents($json_filepath, $new_json))
+    if (file_put_contents($json_filepath, $new_json)){
         echo "<div class='alert alert-success'>Card added successfully!</div>";
-    else 
-        echo "<div class='alert alert-danger'>Uh-Oh! Error when updaing json file!</div>";
 
-    //echo "<pre><code>" . print_r($new_json) . "</code></pre>";
+        //If this was an edit, update the page with the current card values OR redirect to Album.
+        if($isEdit){
+            //redirect to the album page.
+            header("Location: ?page=album");
+            //Edits are given a New UID.
+            //header("Location: ?page=add&uid=$card_uid");
+        }
+    }
+    else {
+        echo "<div class='alert alert-danger'>Uh-Oh! Error when updating json file!</div>";
+    }
 }
 
 ?>
 
-
+<!-------------------------------------------------BELOW is the VIEW:--------------------------------------->
 <div class='create'>
     <div class='container'>
         <h2 class="alert alert-primary"><?=$heading?></h2>
