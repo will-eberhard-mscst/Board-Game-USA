@@ -8,11 +8,16 @@ $json_filepath = "data/cards.json";
 $json = file_get_contents($json_filepath);
 
 // Decode the JSON file
-$json_data = json_decode($json);
+$json_data = json_decode($json, true);
 
 // Display data
 //echo "<pre><code>" . print_r($json_data) . "</code></pre>";
-$lang = $json_data->eng;
+$lang = $json_data['eng'];
+
+
+//Set position and question cards.
+$positions = $lang['positions'];
+$questions = $lang['questions'];
 
 
 
@@ -23,14 +28,14 @@ If no cat_id is entered, none will be selected.
 function GetCategories($cat_id = ""){
     global $lang;
 
-    $categories = $lang->categories;
+    $categories = $lang['categories'];
 
     $cat_options = "";
 
     foreach($categories as $cat){
-        $id = $cat->id;
-        $name = $cat->name;
-        $desc = $cat->desc;
+        $id = $cat['id'];
+        $name = $cat['name'];
+        $desc = $cat['desc'];
 
         //select the cat_id
         $selected = "";
@@ -54,8 +59,8 @@ function AddBonus($position_no, $bonus_no, $bonus = null){
     $points = 0;
 
     if($bonus){
-        $cat_id = $bonus->id;
-        $points = $bonus->points;
+        $cat_id = $bonus['id'];
+        $points = $bonus['points'];
     }
 
     $cat_options = GetCategories($cat_id);
@@ -86,8 +91,8 @@ function AddSmear($position_no, $smear_no, $smear = null){
     $points = 0;
 
     if($smear){
-        $cat_id = $smear->id;
-        $points = $smear->points;
+        $cat_id = $smear['id'];
+        $points = $smear['points'];
     }
 
     $cat_options = GetCategories($cat_id);
@@ -122,30 +127,30 @@ function AddPosition(int $position_no, $position_card = null){
     If we have a valid Position card, set all the default field values.
     */
     if($position_card){
-        $text = $position_card->text;
+        $text = $position_card['text'];
         
         $i = 0;
-        foreach($position_card->bonuses as $bonus){
+        foreach($position_card['bonuses'] as $bonus){
             $bonus_tags .= AddBonus($position_no, $i++, $bonus);
         }
 
         //if Smears are not set, create an empty array.
-        if(!isset($position_card->smears)){
-            $position_card->smears = array();
+        if(!isset($position_card['smears'])){
+            $position_card['smears'] = array();
         }
 
         $i = 0;
-        foreach($position_card->smears as $smear){
+        foreach($position_card['smears'] as $smear){
             $smear_tags .= AddSmear($position_no, $i++, $smear);
         }
 
         /*
         If either of these have 0 entries, create at least one empty Bonus or Smear.
         */
-        if(count($position_card->bonuses) == 0){
+        if(count($position_card['bonuses']) == 0){
             $bonus_tags = AddBonus($position_no, 0);
         }
-        if(count($position_card->smears) == 0){
+        if(count($position_card['smears']) == 0){
             $smear_tags = AddSmear($position_no, 0);
         }
     }
@@ -208,8 +213,123 @@ if(isset($_POST['functionname'])){
             echo AddPosition($_POST['data0']);
             break;
     }
+}
 
-    exit;
+
+
+/*
+Check for Search queries.
+-   Search position text, question text, and answer text. Using the same search field.
+-   WHERE the card has a bonus or smear in category X
+-   This could potentially be added to the stats page as well.
+*/
+$category = isset($_GET['category']) ? $_GET['category'] : "";
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+
+if(isset($_GET["search"]))
+{
+
+    //Search for Bonus or Smear categories
+    if(isset($_GET['category']) && !empty($_GET['category'])){
+
+        $filtered_positions = array();
+        $filtered_questions = array();
+
+        //Need to check both Bonuses and Smears for the category:
+        foreach($positions as $pos){
+            foreach($pos['bonuses'] as $obj){
+                if($obj['id'] == $category){
+                    $filtered_positions[] = $pos;
+                    break;
+                }
+            }            
+
+            if(isset($pos['smears'])){
+                foreach($pos['smears'] as $obj){
+                    if($obj['id'] == $category){
+                        $filtered_positions[] = $pos;
+                        break;
+                    }
+                }   
+            }
+        }
+
+        $positions = $filtered_positions;
+
+
+        //Now check the question text:        
+        //Add the question to the array if it contains the category.
+        foreach($questions as $que){
+
+            $que_added = false;
+
+            foreach($que['answers'] as $answer){
+
+                foreach($answer['bonuses'] as $obj){
+                    if($obj['id'] == $category){
+                        $filtered_questions[] = $que;
+                        $que_added = true;
+                        break;
+                    }
+                }
+
+                foreach($answer['smears'] as $obj){
+                    if($obj['id'] == $category){
+                        $filtered_questions[] = $que;
+                        $que_added = true;
+                        break;
+                    }
+                }
+
+                //If the question was added once, break out of the answers loop.
+                if($que_added) break;
+            }            
+        }
+
+        $questions = $filtered_questions;
+        
+    }
+
+
+    //Search By keyword if a keyword is entered.
+    if(isset($_GET['keyword']) && !empty($_GET['keyword'])){
+
+        $filtered_positions = array();
+        $filtered_questions = array();
+        
+        //Add the Position to the array if it contains the word.
+        foreach($positions as $pos){
+            if(strpos($pos['text'], $keyword) ){
+                $filtered_positions[] = $pos;
+            }
+        }
+
+        $positions = $filtered_positions;
+
+
+        //Now check the question text:        
+        //Add the question to the array if it contains the word.
+        foreach($questions as $que){
+            if(strpos($que['text'], $keyword) ){
+                $filtered_questions[] = $que;
+            }
+            /*
+            If a question does not contain the word, check if any of its answers do.
+            If any of the answers do, add the entire question to the array.
+            */
+            else{
+                foreach($que['answers'] as $answer){
+                    if(strpos($answer['text'], $keyword) ){
+                        $filtered_questions[] = $que;
+                        break;
+                    }
+                }
+            }
+        }
+
+        $questions = $filtered_questions;
+    }
+
 }
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+require('utils.php');
 /*
 Date: 8/31/2022
 
@@ -10,20 +11,6 @@ Feature:
 -   Edit a Card
     -   Both Position Cards and Question Cards.
 */
-
-
-//Read the JSON file
-$json_filepath = "data/cards.json";
-$json = file_get_contents($json_filepath);
-
-// Decode the JSON file
-$json_data = json_decode($json, true);
-$lang = $json_data['eng'];
-
-//echo "<pre><code>" . print_r($categories) . "</code></pre>";
-
-// Display data
-//echo "<pre><code>" . print_r($json_data) . "</code></pre>";
 
 /*
 AJAX:
@@ -207,14 +194,33 @@ function DrawQuestionCard($question){
     <div class='container'>
         <h2 class="alert alert-primary">Card Album</h2>
 
+        <!--Form for searching -->
+        <div class='container search'>
+            <form method='get'>
+                <div><input type="text" name='page' value='album' hidden></div>
+
+                <div><label for='keyword'>Keyword:</label></div>
+                <div><input type='text' name='keyword' value='<?=$keyword?>'></div>
+
+                <div><label for='category'>Category</label></div>
+                <div>
+                    <select class='chosen-select' name='category'>
+                        <?=GetCategories($category)?>
+                    </select>
+                </div>
+
+                <div><input type="submit" name='search' value="Search" class='btn btn-info short'></div>
+            </form>
+        </div>
+
         <div class='container'>
             
             <h3>Positions:</h3>
             <div class='container totals'>
-                <div><strong>Total count:</strong> <?=count($lang['positions'])?></div>
+                <div><strong>Postion Cards Found:</strong> <?=count($positions)?></div>
             </div>
             <?php
-            foreach($lang['positions'] as $pos)
+            foreach($positions as $pos)
             {
                 DrawPosCard($pos);
             }
@@ -222,10 +228,10 @@ function DrawQuestionCard($question){
 
             <h3>Questions:</h3>
             <div class='container totals'>
-                <div><strong>Total count:</strong> <?=count($lang['questions'])?></div>
+                <div><strong>Question Cards Found:</strong> <?=count($questions)?></div>
             </div>
             <?php
-            foreach($lang['questions'] as $que)
+            foreach($questions as $que)
             {
                 DrawQuestionCard($que);
             }

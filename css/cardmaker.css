@@ -85,12 +85,12 @@ a.navbar-brand {
     margin-bottom: 10px;
   }
 
-  .create input, select, h2, textarea{
+  .create input, select, h2, textarea, .album input{
     margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  input[type='text'], input[type='button'].long, input[type='submit'], select, textarea{
+  input[type='text'], input[type='button'].long, input[type='submit'].long, select, textarea{
     width: 100%;
   }
 
@@ -105,8 +105,9 @@ a.navbar-brand {
   }
   
 
-  .inner, .totals{
+  .inner, .totals, .search{
     background-color: rgb(205, 237, 245);
+    border-radius: 5px;
   }
 
   .outer{

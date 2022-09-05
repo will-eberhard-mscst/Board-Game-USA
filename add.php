@@ -75,24 +75,24 @@ Returns a card given its UID
 */
 function GetCard($uid){
     global $json_data;
-    $lang = $json_data->eng;
+    $lang = $json_data['eng'];
 
     //Check the position cards
     $i = 0;
-    $array = $lang->positions;
+    $array = $lang['positions'];
     foreach($array as $obj)
     {
-        if($obj->uid == $uid){
+        if($obj['uid'] == $uid){
             return $obj;
         }
         $i++;
     }
 
     //Check the Question cards
-    $array = $lang->questions;
+    $array = $lang['questions'];
     foreach($array as $obj)
     {
-        if($obj->uid == $uid){
+        if($obj['uid'] == $uid){
             return $obj;
         }
         $i++;
@@ -106,7 +106,7 @@ Returns a string with the card type.
 */
 function GetCardType($card){
     //returns 0 for position, 1 for Question.
-    $card_type = isset($card->answers);
+    $card_type = isset($card['answers']);
 
     $type = '';
 
@@ -130,7 +130,7 @@ if(isset($_POST["submit"]))
     Get the last Card uid
     The uid is unique to every card and position.
     */
-    $uid = $json_data->card_uid_counter;
+    $uid = $json_data['card_uid_counter'];
 
     //Whatever the uid is now is our card's uid.
     $card_uid = $uid;    
@@ -143,7 +143,7 @@ if(isset($_POST["submit"]))
     //Select the card array to get based on the card type.
     switch($card_type){
         case "Position":
-            $array = $lang->positions;
+            $array = $lang['positions'];
             $delete_array = $array;
             break;
         
@@ -159,7 +159,7 @@ if(isset($_POST["submit"]))
 
             //We will use the Answers array to get the positions in this case:
             $array = $question->answers;
-            $delete_array = $lang->questions;
+            $delete_array = $lang['questions'];
             break;
     }
     
@@ -180,19 +180,19 @@ if(isset($_POST["submit"]))
         $i = 0;
         foreach($delete_array as $obj)
         {
-            if($obj->uid == $_GET['uid']){
+            if($obj['uid'] == $_GET['uid']){
                 //remove from the array.
                 array_splice($delete_array, $i, 1);
 
                 //update the JSON file.
                 if($card_type == "Position"){
-                    $json_data->eng->positions = $delete_array;
+                    $json_data['eng']['positions'] = $delete_array;
                     //Update the array for adding new positions.
                     $array = $delete_array;
                     break;
                 }
                 else if($card_type == "Question"){
-                    $json_data->eng->questions = $delete_array;
+                    $json_data['eng']['questions'] = $delete_array;
                     break;
                 }
             }
@@ -229,19 +229,19 @@ if(isset($_POST["submit"]))
     
 
     //Update the uid counter:
-    $json_data->card_uid_counter = $uid;
+    $json_data['card_uid_counter'] = $uid;
 
 
     //Update the array in the JSON data:
     switch($card_type){
         case "Position":
-            $json_data->eng->positions = $array;
+            $json_data['eng']['positions'] = $array;
             break;
         
         case "Question":
             //Update the question's answers and then add the question to the questions array.
             $question->answers = $array;
-            $json_data->eng->questions[] = $question;
+            $json_data['eng']['questions'][] = $question;
             break;
     }
     
@@ -318,7 +318,7 @@ if(isset($_POST["submit"]))
             $hide = $isQuestion ? '' : 'hidden';
 
             //Also get the Question text:
-            $question_text = $isQuestion ? $card->text : '';
+            $question_text = $isQuestion ? $card['text'] : '';
 
             echo "
             <div id='question_text' $hide>
@@ -337,7 +337,7 @@ if(isset($_POST["submit"]))
 
                     if($card_type == "Question"){
                         $i = 0;
-                        foreach($card->answers as $pos){
+                        foreach($card['answers'] as $pos){
                             echo AddPosition($i++, $pos);
                         }                        
                     }
