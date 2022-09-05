@@ -63,7 +63,7 @@ class CategoryTotal{
 }
 
 /*
-Calculate the Footer Totals for the cat_totals
+Object to stores Multiple CategoryTotal objects.
 */
 class CategoryTotals{
     public $Totals = array();
@@ -97,6 +97,87 @@ class CategoryTotals{
         }
         return $num;
     }
+
+    /*
+    Calculate the Sum of all the Sum of the bonuses plus points
+    */
+    function GetSumBonusesPlus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->BonusTotalPlus->sum;
+        }
+        return $num;
+    }
+
+
+    /*
+    Calculate the number of total bonuses minus
+    */
+    function GetNumBonusesMinus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->BonusTotalMinus->count;
+        }
+        return $num;
+    }
+
+    /*
+    Calculate the Sum of all the Sum of the bonuses minus points
+    */
+    function GetSumBonusesMinus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->BonusTotalMinus->sum;
+        }
+        return $num;
+    }
+
+
+    /*
+    Calculate the number of total Smears plus
+    */
+    function GetNumSmearsPlus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->SmearTotalPlus->count;
+        }
+        return $num;
+    }
+
+    /*
+    Calculate the Sum of all the Sum of the Smears plus points
+    */
+    function GetSumSmearsPlus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->SmearTotalPlus->sum;
+        }
+        return $num;
+    }
+
+
+    /*
+    Calculate the number of total Smears minus
+    */
+    function GetNumSmearsMinus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->SmearTotalMinus->count;
+        }
+        return $num;
+    }
+
+    /*
+    Calculate the Sum of all the Sum of the Smears minus points
+    */
+    function GetSumSmearsMinus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->SmearTotalMinus->sum;
+        }
+        return $num;
+    }
+    
 
 }
 

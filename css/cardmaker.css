@@ -169,6 +169,14 @@ a.navbar-brand {
     color: white;
   }
 
+  .stats tfoot td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #aa410444;
+    font-weight: bold;
+  }
+
   .stats caption{
     caption-side: top;
     font-size: 20px;

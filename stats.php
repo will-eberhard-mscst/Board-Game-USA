@@ -215,9 +215,9 @@ foreach($lang['questions'] as $question){
                         <tr>
                             <td><strong>Totals:</strong></td>
                             <td><?=$cat_totals->GetNumBonusesPlus()?></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><?=$cat_totals->GetNumBonusesMinus()?></td>
+                            <td><?=$cat_totals->GetSumBonusesPlus()?></td>
+                            <td><?=$cat_totals->GetSumBonusesMinus()?></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -242,6 +242,15 @@ foreach($lang['questions'] as $question){
                         }
                         ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Totals:</strong></td>
+                            <td><?=$cat_totals->GetNumSmearsPlus()?></td>
+                            <td><?=$cat_totals->GetNumSmearsMinus()?></td>
+                            <td><?=$cat_totals->GetSumSmearsPlus()?></td>
+                            <td><?=$cat_totals->GetSumSmearsMinus()?></td>
+                        </tr>
+                    </tfoot>
                 </table>
                 
             </div>
@@ -275,6 +284,15 @@ foreach($lang['questions'] as $question){
                         }
                         ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Totals:</strong></td>
+                            <td><?=$question_totals->GetNumBonusesPlus()?></td>
+                            <td><?=$question_totals->GetNumBonusesMinus()?></td>
+                            <td><?=$question_totals->GetSumBonusesPlus()?></td>
+                            <td><?=$question_totals->GetSumBonusesMinus()?></td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <table class='stats'>
@@ -297,6 +315,15 @@ foreach($lang['questions'] as $question){
                         }
                         ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Totals:</strong></td>
+                            <td><?=$question_totals->GetNumSmearsPlus()?></td>
+                            <td><?=$question_totals->GetNumSmearsMinus()?></td>
+                            <td><?=$question_totals->GetSumSmearsPlus()?></td>
+                            <td><?=$question_totals->GetSumSmearsMinus()?></td>
+                        </tr>
+                    </tfoot>
                 </table>
 
             </div>
