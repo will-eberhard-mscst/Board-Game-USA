@@ -24,7 +24,7 @@ Stores the id, number of occurances, and the sum of all the points.
 */
 class Total{
     public $id;
-    public $count;
+    public $count = 0;
     public $sum = 0;
 
     function __construct($id)
@@ -60,8 +60,43 @@ class CategoryTotal{
         $this->SmearTotalPlus = new Total($id);
         $this->SmearTotalMinus = new Total($id);
     }
+}
 
+/*
+Calculate the Footer Totals for the cat_totals
+*/
+class CategoryTotals{
+    public $Totals = array();
 
+    //Number of cards with bonuses
+    public $num_bonus_cards = 0;
+
+    //Number of cards with smears
+    public $num_smear_cards = 0;
+
+    function __construct()
+    {
+        
+    }
+
+    function CountBonusCard(){
+        $this->num_bonus_cards++;
+    }
+
+    function CountSmearCard(){
+        $this->num_smear_cards++;
+    }
+
+    /*
+    Calculate the number of total bonuses plus
+    */
+    function GetNumBonusesPlus(){
+        $num = 0;
+        foreach($this->Totals as $totals){
+            $num += $totals->BonusTotalPlus->count;
+        }
+        return $num;
+    }
 
 }
 

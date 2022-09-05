@@ -221,7 +221,9 @@ function DrawQuestionCard($question){
             ?>
 
             <h3>Questions:</h3>
-            <div>Total count: <?=count($lang['questions'])?></div>
+            <div class='container totals'>
+                <div><strong>Total count:</strong> <?=count($lang['questions'])?></div>
+            </div>
             <?php
             foreach($lang['questions'] as $que)
             {

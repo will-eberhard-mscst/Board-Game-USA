@@ -37,24 +37,37 @@ function GetCategoryName($id){
 
 
 //Create an Associative Array of all the categories
-$cat_totals = array();
-$question_totals = array();
+$cat_totals = new CategoryTotals();//array();
+$question_totals = new CategoryTotals();//array();
 foreach($lang['categories'] as $cat){
     //If not empty, add to the array.
     $id = $cat['id'];
     if(!empty(trim($id))){
-        $cat_totals[$id] = new CategoryTotal($id);
-        $question_totals[$id] = new CategoryTotal($id);
+        $cat_totals->Totals[$id] = new CategoryTotal($id);
+        $question_totals->Totals[$id] = new CategoryTotal($id);
     }
 }
+
+
 
 /*
 Count the number of Plus and Minus points for each Position Category.
 */
 foreach($lang['positions'] as $card)
 {
-    foreach($cat_totals as $key => $cat){
-    
+
+    if(isset($card['bonuses']) && count($card['bonuses']) > 0){
+        //Count the Number of Bonus Cards.
+        $cat_totals->CountBonusCard();
+    }
+
+    if(isset($card['smears']) && count($card['smears']) > 0){
+        //Count the Number of Smear Cards.
+        $cat_totals->CountSmearCard();
+    }
+
+    foreach($cat_totals->Totals as $key => $cat){
+
         foreach($card['bonuses'] as $obj){
             if($obj['id'] == $key){
 
@@ -72,8 +85,10 @@ foreach($lang['positions'] as $card)
 
             }
         }
+        
 
         if(isset($card['smears'])){
+
             foreach($card['smears'] as $obj){
                 if($obj['id'] == $key){
 
@@ -103,9 +118,20 @@ Count all the totals for Question Cards now.
 foreach($lang['questions'] as $question){
     foreach($question['answers'] as $card)
     {
-        //Make this a Function that returns an Array.
-        foreach($question_totals as $key => $cat){
+        //Make this a Function that returns an Array OR part of the CategoryTotals class
+        if(isset($card['bonuses']) && count($card['bonuses']) > 0){
+            //Count the Number of Bonus Cards.
+            $question_totals->CountBonusCard();
+        }
+    
+        if(isset($card['smears']) && count($card['smears']) > 0){
+            //Count the Number of Smear Cards.
+            $question_totals->CountSmearCard();
+        }
+
         
+        foreach($question_totals->Totals as $key => $cat){
+
             foreach($card['bonuses'] as $obj){
                 if($obj['id'] == $key){
 
@@ -123,8 +149,10 @@ foreach($lang['questions'] as $question){
 
                 }
             }
+            
 
             if(isset($card['smears'])){
+
                 foreach($card['smears'] as $obj){
                     if($obj['id'] == $key){
 
@@ -160,7 +188,8 @@ foreach($lang['questions'] as $question){
             <h3>Positions:</h3>
             <div class='container totals'>
                 <div><strong>Total Position Cards:</strong> <?=count($lang['positions'])?></div>
-
+                <div><strong>Total Bonus Cards:</strong> <?=$cat_totals->num_bonus_cards?></div>
+                <div><strong>Total Smear Cards:</strong> <?=$cat_totals->num_smear_cards?></div>
                 
                 <table class='stats'>
                     <caption>Bonuses per Category:</caption>
@@ -169,7 +198,7 @@ foreach($lang['questions'] as $question){
                     </thead>
                     <tbody>
                         <?php
-                        foreach($cat_totals as $cat => $totals){
+                        foreach($cat_totals->Totals as $cat => $totals){
                         ?>
                             <tr>
                                 <td><?=GetCategoryName($cat)?></td>
@@ -182,6 +211,15 @@ foreach($lang['questions'] as $question){
                         }
                         ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Totals:</strong></td>
+                            <td><?=$cat_totals->GetNumBonusesPlus()?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <table class='stats'>
@@ -191,7 +229,7 @@ foreach($lang['questions'] as $question){
                     </thead>
                     <tbody>
                         <?php
-                        foreach($cat_totals as $cat => $totals){
+                        foreach($cat_totals->Totals as $cat => $totals){
                         ?>
                             <tr>
                                 <td><?=GetCategoryName($cat)?></td>
@@ -214,6 +252,8 @@ foreach($lang['questions'] as $question){
             <div class='container totals'>
                 <div><strong>Total Question Cards:</strong>  <?=count($lang['questions'])?></div>
                 <div><strong>Total Answers:</strong>  <?=count($lang['questions']) * 3?></div>
+                <div><strong>Total Bonus Answers:</strong> <?=$question_totals->num_bonus_cards?></div>
+                <div><strong>Total Smear Answer:</strong> <?=$question_totals->num_smear_cards?></div>
 
                 <table class='stats'>
                     <caption>Bonuses per Category:</caption>
@@ -222,7 +262,7 @@ foreach($lang['questions'] as $question){
                     </thead>
                     <tbody>
                         <?php
-                        foreach($question_totals as $cat => $totals){
+                        foreach($question_totals->Totals as $cat => $totals){
                         ?>
                             <tr>
                                 <td><?=GetCategoryName($cat)?></td>
@@ -244,7 +284,7 @@ foreach($lang['questions'] as $question){
                     </thead>
                     <tbody>
                         <?php
-                        foreach($question_totals as $cat => $totals){
+                        foreach($question_totals->Totals as $cat => $totals){
                         ?>
                             <tr>
                                 <td><?=GetCategoryName($cat)?></td>
