@@ -66,11 +66,20 @@ a.navbar-brand {
   
   /*Makeshift dark mode*/
   body {
-    background-color: rgb(31, 4, 82);
+    background-color: #15202B;
   }
 
   .create, .album{
-    background-color: rgb(98, 78, 136);
+    background-color: #22303C;
+  }
+
+  .album h3, #positions h2, .options label{
+    color: white;
+  }
+
+  .album h3, #positions h2{
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   
   /* Add / Create card page. */
@@ -147,6 +156,7 @@ a.navbar-brand {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    padding-bottom: 5px;
   }
 
   .stats td, .stats th {

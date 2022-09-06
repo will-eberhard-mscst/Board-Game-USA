@@ -18,6 +18,23 @@ $header_row = "
 </tr>
 ";
 
+/*
+Hard Coded values for number of occurences per state.
+*/
+$occurances = array(
+    "jus" => 13,
+    "env" => 10,
+    "tra" => 25,
+    "job" => 14,
+    "eco" => 21,
+    "glo" => 10,
+    "wel" => 23,
+    "nat" => 14,
+    "tax" => 17,
+    "sec" => 15,
+    "pat" => 0
+);
+
 
 /*
 Returns the Name of the Category given the ID.
@@ -184,6 +201,31 @@ foreach($lang['questions'] as $question){
         <h2 class="alert alert-primary">Card Stats</h2>
 
         <div class='container'>
+
+            <h3>Categories</h3>
+            <div class='container totals'>
+                <table class='stats'>
+                    <caption>Categories Per State:</caption>
+                    <thead>                        
+                        <tr>
+                            <th>Category</th>
+                            <th>Occurences</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach($occurances as $cat => $occurance){
+                        ?>
+                            <tr>
+                                <td><?=GetCategoryName($cat)?></td>
+                                <td><?=$occurance?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
             
             <h3>Positions:</h3>
             <div class='container totals'>

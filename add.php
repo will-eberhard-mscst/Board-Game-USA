@@ -286,46 +286,50 @@ if(isset($_POST["submit"]))
 
         <form method='post'>
 
-            <?php
-            if(!$isEdit){
-            ?>
-                <div><label>Select the card type:</label></div>
-                <div>
-                    <input type="radio" name="card_type" id="position" value="Position" checked>
-                    <label for="position">Position</label>
-                    <input type="radio" name="card_type" id="question" value="Question">
-                    <label for="question">Question</label>                
+            <div class='options'>
+                <?php
+                if(!$isEdit){
+                ?>
+                    
+                    <div><label>Select the card type:</label></div>
+                    <div>
+                        <input type="radio" name="card_type" id="position" value="Position" checked>
+                        <label for="position">Position</label>
+                        <input type="radio" name="card_type" id="question" value="Question">
+                        <label for="question">Question</label>                
+                    </div>
+                    
+                <?php
+                }
+                else{
+                    /*
+                    Hidden Card Type value. 
+                    Set the value as either 'Position' or 'Question' based on the current card type.
+                    */
+                    
+                    echo '
+                    <div>       
+                        <input type="text" name="card_type" value="' . $card_type . '" hidden>
+                    </div>
+                    ';
+                }
+                ?>
+
+                <?php
+                //On Edit, hidden the Question Text if this is a Position Card.
+                $isQuestion = $isEdit && $card_type == "Question";
+                $hide = $isQuestion ? '' : 'hidden';
+
+                //Also get the Question text:
+                $question_text = $isQuestion ? $card['text'] : '';
+
+                echo "
+                <div id='question_text' $hide>
+                ";
+                ?>
+                    <div><label for='question_text'>Question Text</label></div>
+                    <div><textarea name='question_text'><?=$question_text?></textarea></div>
                 </div>
-            <?php
-            }
-            else{
-                /*
-                Hidden Card Type value. 
-                Set the value as either 'Position' or 'Question' based on the current card type.
-                */
-                
-                echo '
-                <div>       
-                    <input type="text" name="card_type" value="' . $card_type . '" hidden>
-                </div>
-                ';
-            }
-            ?>
-
-            <?php
-            //On Edit, hidden the Question Text if this is a Position Card.
-            $isQuestion = $isEdit && $card_type == "Question";
-            $hide = $isQuestion ? '' : 'hidden';
-
-            //Also get the Question text:
-            $question_text = $isQuestion ? $card['text'] : '';
-
-            echo "
-            <div id='question_text' $hide>
-            ";
-            ?>
-                <div><label for='question_text'>Question Text</label></div>
-                <div><textarea name='question_text'><?=$question_text?></textarea></div>
             </div>
 
             <div id='positions'>

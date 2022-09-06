@@ -20,9 +20,9 @@ require('classes/card.php');
     <script type="text/javascript" src="../utils/datatables/datatables.min.js"></script>
     
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Card Maker</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Card Maker</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,13 +30,13 @@ require('classes/card.php');
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href='?page=add'>Create</a>
+                            <a class="nav-link text-light" href='?page=add'>Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href='?page=album'>Album</a>
+                            <a class="nav-link text-light" href='?page=album'>Album</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href='?page=stats'>Stats</a>
+                            <a class="nav-link text-light" href='?page=stats'>Stats</a>
                         </li>
                     </ul>
                 </div>
