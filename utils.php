@@ -299,7 +299,7 @@ if(isset($_GET["search"]))
         
         //Add the Position to the array if it contains the word.
         foreach($positions as $pos){
-            if(strpos($pos['text'], $keyword) ){
+            if(strpos(strtolower($pos['text']), strtolower($keyword)) ){
                 $filtered_positions[] = $pos;
             }
         }
@@ -310,7 +310,7 @@ if(isset($_GET["search"]))
         //Now check the question text:        
         //Add the question to the array if it contains the word.
         foreach($questions as $que){
-            if(strpos($que['text'], $keyword) ){
+            if(strpos(strtolower($que['text']), strtolower($keyword)) ){
                 $filtered_questions[] = $que;
             }
             /*
@@ -319,7 +319,7 @@ if(isset($_GET["search"]))
             */
             else{
                 foreach($que['answers'] as $answer){
-                    if(strpos($answer['text'], $keyword) ){
+                    if(strpos(strtolower($answer['text']), strtolower($keyword)) ){
                         $filtered_questions[] = $que;
                         break;
                     }

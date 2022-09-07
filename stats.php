@@ -204,7 +204,7 @@ foreach($lang['questions'] as $question){
 
             <h3>Categories</h3>
             <div class='container totals'>
-                <table class='stats'>
+                <table class='stats bonus'>
                     <caption>Categories Per State:</caption>
                     <thead>                        
                         <tr>
@@ -233,7 +233,7 @@ foreach($lang['questions'] as $question){
                 <div><strong>Total Bonus Cards:</strong> <?=$cat_totals->num_bonus_cards?></div>
                 <div><strong>Total Smear Cards:</strong> <?=$cat_totals->num_smear_cards?></div>
                 
-                <table class='stats'>
+                <table class='stats bonus'>
                     <caption>Bonuses per Category:</caption>
                     <thead>                        
                         <?=$header_row?>
@@ -264,7 +264,7 @@ foreach($lang['questions'] as $question){
                     </tfoot>
                 </table>
 
-                <table class='stats'>
+                <table class='stats smear'>
                     <caption>Smears per Category:</caption>
                     <thead>
                         <?=$header_row?>
@@ -306,7 +306,7 @@ foreach($lang['questions'] as $question){
                 <div><strong>Total Bonus Answers:</strong> <?=$question_totals->num_bonus_cards?></div>
                 <div><strong>Total Smear Answer:</strong> <?=$question_totals->num_smear_cards?></div>
 
-                <table class='stats'>
+                <table class='stats bonus'>
                     <caption>Bonuses per Category:</caption>
                     <thead>                        
                         <?=$header_row?>
@@ -337,7 +337,7 @@ foreach($lang['questions'] as $question){
                     </tfoot>
                 </table>
 
-                <table class='stats'>
+                <table class='stats smear'>
                     <caption>Smears per Category:</caption>
                     <thead>
                         <?=$header_row?>

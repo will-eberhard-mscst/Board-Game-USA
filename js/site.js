@@ -205,6 +205,14 @@ function DeleteCard(uid, card_type){
 --------------------------------stats.php---------------------------
 */
 
-$('.stats').dataTable({
-    paging: false
+$('table.bonus').dataTable({
+    paging: false,
+    //sort by second column by default:
+    order: [[1,'desc']]
+});
+
+$('table.smear').dataTable({
+    paging: false,
+    //sort by second column by default:
+    order: [[2,'desc']]
 });
