@@ -30,6 +30,7 @@ function AddBonus(position_no){
             var elm = $('#bonuses'+position_no+'');
 
             if(textstatus == 'success'){
+                console.log(obj);
                 elm.append(obj);
                 //chosen must be called again to apply it to the dropdown menu.
                 $(".chosen-select").chosen();
@@ -100,7 +101,7 @@ function AddPosition(position_no){
             if(success){
                 elm.append(obj);
                 $(".chosen-select").chosen();
-                //console.log(obj);
+                console.log(obj);
             }
             else{
                 elm.append("<p class='alert alert-danger'>An error occured</p>");

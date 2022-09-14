@@ -163,11 +163,13 @@ if(isset($_POST["submit"]))
             break;
     }
     
-
+    //sort the text array to ensure it is in order.
+    $text_array = $_POST["text"];
+    ksort($text_array);
     /*
     If the text is empty OR (there are 0 bonuses and 0 Smears, then prevent the submission)
     */
-    if(empty($_POST["text"][0]) || (empty($_POST["bonuses"][0][0]["id"]) && empty($_POST["smears"][0][0]["id"])) ){
+    if(empty($text_array[0]) || (empty($_POST["bonuses"][0][0]["id"]) && empty($_POST["smears"][0][0]["id"])) ){
         echo "<div class='alert alert-danger'>ERROR: You didn't enter any text, bonuses or Smears.</div>";
         exit;
     }
@@ -203,7 +205,7 @@ if(isset($_POST["submit"]))
 
     //Each text is an indicator of how many Positions exist.
     $i = 0;
-    foreach($_POST["text"] as $text){
+    foreach($text_array as $text){
         $position = new Position($uid++, $text);
 
         //Add Each Bonus as long as they are not empty:
@@ -225,7 +227,6 @@ if(isset($_POST["submit"]))
 
         $i++;
     }
-
     
 
     //Update the uid counter:
