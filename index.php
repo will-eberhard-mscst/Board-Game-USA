@@ -32,6 +32,9 @@ require('classes/card.php');
                             <a class="nav-link text-light" href='?page=album'>Album</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-light" href='?page=print'>Print</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-light" href='?page=stats'>Stats</a>
                         </li>
                     </ul>

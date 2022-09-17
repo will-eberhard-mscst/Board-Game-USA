@@ -2,194 +2,238 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
-  }
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
   
-  a {
-    color: #0077cc;
-  }
-  
-  .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-  }
-  
-  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-  }
-  
+a {
+  color: #0077cc;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 16px;
   }
-  @media (min-width: 768px) {
-    html {
-      font-size: 16px;
-    }
-  }
-  
-  .border-top {
-    border-top: 1px solid #e5e5e5;
-  }
-  .border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-  }
-  
-  .box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-  }
-  
-  button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-  }
-  
-  html {
-    position: relative;
-    min-height: 100%;
-  }
-  
-  body {
-    margin-bottom: 60px;
-  }
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px;
-  }
-  
-  /*Makeshift dark mode*/
-  body {
-    background-color: #15202B;
-  }
+}
 
-  .create, .album{
-    background-color: #22303C;
-  }
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
 
-  .album h3, #positions h2, .options label{
-    color: white;
-  }
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
 
-  .album h3, #positions h2{
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-  /* Add / Create card page. */
-  label{
-    font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
 
-  h3[class='heading']{
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+html {
+  position: relative;
+  min-height: 100%;
+}
 
-  .create input, select, h2, textarea, .album input{
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+body {
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
 
-  input[type='text'], input[type='button'].long, input[type='submit'].long, select, textarea{
-    width: 100%;
-  }
+/*Makeshift dark mode*/
+body {
+  background-color: #15202B;
+}
 
-  input[type='number']{
-    max-width: 50px;
-  }
+.create, .album{
+  background-color: #22303C;
+}
 
-  .create .container{
-    border: solid black 1px;
-    border-radius: 10px;
-    padding-bottom: 10px;
-  }
-  
+.album h3, #positions h2, .options label{
+  color: white;
+}
 
-  .inner, .totals, .search{
-    background-color: rgb(205, 237, 245);
-    border-radius: 5px;
-  }
+.album h3, #positions h2{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 
-  .outer{
-    background-color: rgb(237, 246, 248);
-  }
+/* Add / Create card page. */
+label{
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-  /* Album page: */
-  .album{
-    border: solid black 1px;
-    border-radius: 10px;
-    padding-bottom: 10px;
-  }
+h3[class='heading']{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-  .pos-card{
-    background-color: rgb(228, 241, 204);
-    border-radius: 5px;
-    margin: 5px;
-  }
+.create input, select, h2, textarea, .album input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-  .pos-card div, .que-card div{
-    padding: 1px;
-  }
+input[type='text'], input[type='button'].long, input[type='submit'].long, select, textarea{
+  width: 100%;
+}
 
-  .que-card, .que-card .pos-card{
-    background-color: rgb(204, 209, 241);
-    border-radius: 5px;
-    margin: 5px;
-  }
+input[type='number']{
+  max-width: 50px;
+}
 
-  .short{
-    width: 80px;
-  }
+.create .container{
+  border: solid black 1px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
 
 
-  /*Stats page*/
-  .stats{
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    padding-bottom: 5px;
-  }
+.inner, .totals, .search{
+  background-color: rgb(205, 237, 245);
+  border-radius: 5px;
+}
 
-  .stats td, .stats th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
+.outer{
+  background-color: rgb(237, 246, 248);
+}
 
-  .stats tr:nth-child(even){
-    background-color: #f2f2f2;
-  }
+/* Album page: */
+.album{
+  border: solid black 1px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
 
-  .stats tr:hover {
-    background-color: #ddd;
-  }
+.pos-card{
+  background-color: rgb(228, 241, 204);
+  border-radius: 5px;
+  margin: 5px;
+}
 
-  .stats th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #04AA6D;
-    color: white;
-  }
+.pos-card div, .que-card div{
+  padding: 1px;
+}
 
-  .stats tfoot td {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #aa410444;
-    font-weight: bold;
-  }
+.que-card, .que-card .pos-card{
+  background-color: rgb(204, 209, 241);
+  border-radius: 5px;
+  margin: 5px;
+}
 
-  .stats caption{
-    caption-side: top;
-    font-size: 20px;
-    font-weight: bold;
-  }
+.short{
+  width: 80px;
+}
+
+
+/*Stats page*/
+.stats{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.stats td, .stats th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.stats tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.stats tr:hover {
+  background-color: #ddd;
+}
+
+.stats th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.stats tfoot td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #aa410444;
+  font-weight: bold;
+}
+
+.stats caption{
+  caption-side: top;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/*Print page*/
+
+
+.print .card{
+  width: 63mm;
+  height: 88mm;
+  border: 2mm solid black;
+  border-radius: 2.7mm;
+  position: relative;
+  margin: 0mm;
+}
+
+/*Card text border.*/
+.print .card .card-text{
+  position:absolute; 
+  top:38mm;
+  left: 4mm;
+  width: 55mm;
+  height: 46mm;
+
+  margin-top: -1.5mm;
+  margin-left: -2mm;
+  margin-right: -2mm;
+
+  padding: 1mm;
+
+  background-color: #cfc2bbff;
+  border-radius: 2.7mm;
+
+  /*Used to Middle center the text.*/
+  text-align: center;
+  line-height: 170px;
+}
+
+/* Text within the card*/
+.print .card .card-text span{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  font-family: sans-serif;
+  font-size: 3.5mm;
+  line-height: 5mm;
+}
