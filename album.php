@@ -202,11 +202,21 @@ function DrawQuestionCard($question){
                 <div><label for='keyword'>Keyword:</label></div>
                 <div><input type='text' name='keyword' value='<?=$keyword?>'></div>
 
-                <div><label for='category'>Category</label></div>
+                <div><label for='category'>Category:</label></div>
                 <div>
                     <select class='chosen-select' name='category'>
                         <?=GetCategories($category)?>
                     </select>
+                </div>
+
+                <div><label>Card Type:</label></div>
+                <div>
+                    <input type="radio" name="card_type" id="both" value="Both" checked>
+                    <label for="both">Both</label> 
+                    <input type="radio" name="card_type" id="position" value="Position" <?php if($card_type == "Position") echo "checked"; ?> >
+                    <label for="position">Position</label>
+                    <input type="radio" name="card_type" id="question2" value="Question" <?php if($card_type == "Question") echo "checked"; ?>>
+                    <label for="question2">Question</label>                
                 </div>
 
                 <div><input type="submit" name='search' value="Search" class='btn btn-info short'></div>

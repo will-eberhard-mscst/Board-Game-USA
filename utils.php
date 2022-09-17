@@ -225,9 +225,19 @@ Check for Search queries.
 */
 $category = isset($_GET['category']) ? $_GET['category'] : "";
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+$card_type = isset($_GET['card_type']) ? $_GET['card_type'] : "";
 
 if(isset($_GET["search"]))
 {
+    
+    //If we only want Positions, clear out the Questions
+    if($card_type == "Position"){
+        $questions = array();
+    }
+    //If we only want Questions, clear out the positions
+    if($card_type == "Question"){
+        $positions = array();
+    }
 
     //Search for Bonus or Smear categories
     if(isset($_GET['category']) && !empty($_GET['category'])){
@@ -253,6 +263,7 @@ if(isset($_GET["search"]))
                 }   
             }
         }
+        
 
         $positions = $filtered_positions;
 
@@ -285,6 +296,7 @@ if(isset($_GET["search"]))
                 if($que_added) break;
             }            
         }
+        
 
         $questions = $filtered_questions;
         
@@ -303,6 +315,7 @@ if(isset($_GET["search"]))
                 $filtered_positions[] = $pos;
             }
         }
+        
 
         $positions = $filtered_positions;
 
@@ -326,6 +339,7 @@ if(isset($_GET["search"]))
                 }
             }
         }
+        
 
         $questions = $filtered_questions;
     }
