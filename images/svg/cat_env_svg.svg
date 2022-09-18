@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="22mm"
+   height="22mm"
+   viewBox="0 0 22 22"
+   version="1.1"
+   id="svg21561"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="cat_env_svg.svg">
+  <defs
+     id="defs21555" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="51.29979"
+     inkscape:cy="39.605056"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1240"
+     inkscape:window-height="1057"
+     inkscape:window-x="672"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="1.1875244,21.999691"
+       orientation="0,1"
+       id="guide26082"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,22.106145"
+       orientation="1,0"
+       id="guide26084"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="13.080339,0"
+       orientation="0,1"
+       id="guide26088"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="21.999691,9.8908693"
+       orientation="1,0"
+       id="guide26090"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata21558">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-275)">
+    <path
+       style="display:inline;opacity:1;fill:#007ae5;fill-opacity:1;stroke:#007ae5;stroke-width:0.17366137px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 11.779766,296.87602 v -2.2328 c 6.315,-1.53247 6.751501,-6.69274 6.0162,-11.47405 -0.3509,0.74443 -0.5527,1.53862 -1.6126,2.04672 -0.4901,-2.50181 -2.9971,-7.80544 -5.1835,-10.09138 -2.1864001,2.19825 -4.6935001,7.50189 -5.1835001,10.0037 -1.06,-0.50809 -1.2617,-1.30228 -1.6126,-2.04673 -0.7354,4.78131 -0.2988,9.94159 6.0161001,11.47407 v 2.23278 l 0.78,-0.19704 z"
+       id="path5359-4-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\funfu\Documents\0_Boardgame\Board-Game-USA\images\sq\cat_env_sq.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>
