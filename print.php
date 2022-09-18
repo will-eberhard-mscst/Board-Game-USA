@@ -4,9 +4,19 @@ require('utils.php');
 Date: 9/17/2022
 
 Page for displaying the cards for printing.
-Consider making this a seperate White webpage with no Nav or Footer so that this page can only be used for printing.
-Print will be a button on the Album page instead that prints only the cards from the search query.
+This is a seperate White webpage with no Nav or Footer so that this page can only be used for printing.
+Print is a button on the Album page instead that prints only the cards from the search query.
 Move all the CSS to another folder.
+
+What needs to be done:
+-   We still need to draw Question cards.
+    -   Question cards are landscapes
+    -   Each Question card will need 2 cards drawn
+        -   one for the front
+        -   one for the back
+-   Smear image needs to be an SVG
+-   Welfare image needs a new SVG file
+
 
 See flex container:
 https://getbootstrap.com/docs/4.0/utilities/flex/

@@ -229,6 +229,7 @@ input[type='number']{
 
   padding: 1mm;
 
+  /*border: 1px solid black;*/
   background-color: #cfc2bbff;
   border-radius: 2.7mm;
 
@@ -243,7 +244,7 @@ input[type='number']{
 }
 
 .smear-text{
-  height: 36mm;
+  height: 41mm;
   line-height: 120px;
 }
 
@@ -270,7 +271,7 @@ input[type='number']{
   margin-right: 1mm;
 }
 
-.print-card .card-img{
+.print-card .cat-img{
   width:15mm;
   height:15mm;
   margin-top: 2mm;
@@ -291,7 +292,18 @@ input[type='number']{
 }
 
 /*Negative points and images will be drawn in red.*/
-.print-card .points.bad, .print-card .card-img.bad{
+.print-card .points.bad, .print-card .cat-img.bad{
   filter: hue-rotate(150deg);
   color: #007ae5ff;
+}
+
+/*Image for the Position Type name. AKA, the Smear Label image.*/
+.print-card .position-img{
+  height: 5.5mm;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5mm;
+  width: 50%;
 }

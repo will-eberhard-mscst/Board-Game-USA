@@ -238,10 +238,11 @@ function GetPositionCardImages(Array $category_array){
         //Draw a div so each img-block is draw vertically.
         //Start a new Div on each odd number:
         if($i % 2 != 0) $bonus_tag .= '<div class="img-col">';
-
+            
         $bonus_tag .= '
         <div class="img-block">
-            <img class="card-img '.$bad.'" src="/cardmaker/images/sq/cat_' . $bonus['id'] . '_sq.png" alt="Card image cap">
+           
+            <img class="card-img cat-img '.$bad.'" src="/cardmaker/images/svg/cat_' . $bonus['id'] . '_svg.svg" alt="Card image cap">
             <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
         </div>
         ';
@@ -270,11 +271,13 @@ function GetPositionCard($position){
 
     //check if has smears
     $hasSmears = isset($position['smears']) && count($position['smears']) > 0;
-    $smearCard = 'bonus-text';
+    $position_type = 'bonus-text';
+    $position_name = '';
 
     if($hasSmears){
         $bonus_tag .= GetPositionCardImages($position['smears']);
-        $smearCard = 'smear-text';
+        $position_type = 'smear-text';
+        $position_name = '<img class="card-img position-img" src="/cardmaker/images/smear_text.png" alt="Smear">';
     }
 
     $tag = '
@@ -284,8 +287,9 @@ function GetPositionCard($position){
         </div>
         
         <div class="card-body">
-            <p class="card-text '. $smearCard .'"><span>"' .$position['text'] . '"</span></p>
+            <p class="card-text '. $position_type .'"><span>"' .$position['text'] . '"</span></p>
         </div>
+        '. $position_name .'
     </div>
     ';
 
