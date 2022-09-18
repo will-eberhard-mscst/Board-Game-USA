@@ -30,22 +30,6 @@ if(isset($_POST['functionname'])){
 }
 
 /*
-Returns the Name of the Category given the ID.
-*/
-function GetCategoryName($id){
-    global $lang;
-    $categories = $categories = $lang['categories'];
-
-    foreach($categories as $cat){
-        if($cat['id'] == $id){
-            return $cat['name'];
-        }
-    }
-
-    return $id;
-}
-
-/*
 Delete a Card given the uid.
 Returns true if deleted.
 

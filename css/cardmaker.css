@@ -253,6 +253,12 @@ input[type='number']{
   margin-bottom: 4mm;
   margin-left: 2mm;
   margin-right: 2mm;  
+  display: inline;
+}
+
+/*Each img column. Contains 2 stacked images.*/
+.img-col{
+  margin-right: 1mm;
 }
 
 .print-card .card-img{
@@ -261,14 +267,22 @@ input[type='number']{
   margin-top: 2mm;
 }
 
+
+
 .print-card .points{
   font-family: sans-serif;
   font-size: 9mm;
   vertical-align: middle;
   color: #007ae5ff;
+
+  /*The points needs to be the same width so that they look good when stacked
+  width: 10.5mm;
+  display: inline-block;
+  text-align: left;*/
 }
 
-.bad{
+/*Negative points and images will be drawn in red.*/
+.print-card .points.bad, .print-card .card-img.bad{
   filter: hue-rotate(150deg);
   color: #007ae5ff;
 }

@@ -192,22 +192,78 @@ function AddPosition(int $position_no, $position_card = null){
     return $tag;
 }
 
+/**
+Returns the Name of the Category given the ID.
+*/
+function GetCategoryName($id){
+    global $lang;
+    $categories = $lang['categories'];
+
+    foreach($categories as $cat){
+        if($cat['id'] == $id){
+            return $cat['name'];
+        }
+    }
+
+    return $id;
+}
+
 
 /**
  Returns the HTML for drawing a Position card.
  */
 function GetPositionCard($position){
+
+    $bonus_tag = '';
+
+    if(isset($position['bonuses'])){
+        $i = 1;
+        foreach($position['bonuses'] as $bonus){
+            //Place a + sign if the points are positive:
+            $positive = $bonus['points'] >= 0;
+            $sign = $positive ? '+' : '&minus;';
+            //Add the bad class is the points are negative.
+            $bad = $positive ? '' : 'bad';
+
+            //Draw a div so each img-block is draw vertically.
+            //Start a new Div on each odd number:
+            if($i % 2 != 0) $bonus_tag .= '<div class="img-col">';
+
+            $bonus_tag .= '
+            <div class="img-block">
+                <img class="card-img '.$bad.'" src="/cardmaker/images/sq/cat_' . $bonus['id'] . '_sq.png" alt="Card image cap">
+                <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
+            </div>
+            ';
+
+            //close the div on each Even number.
+            if($i % 2 == 0) $bonus_tag .= '</div>';
+
+            $i++;
+        }
+        //If we ended on an even number, ensure we close the div.
+        if($i % 2 == 0) $bonus_tag .= '</div>';
+    }
+
+    if(isset($position['smears'])){
+        foreach($position['smears'] as $bonus){
+            //Place a + sign if the points are positive:
+            $positive = $bonus['points'] >= 0;
+            $sign = $positive ? '+' : '&minus;';
+            //Add the bad class is the points are negative.
+            $bad = $positive ? '' : 'bad';
+
+            $bonus_tag .= '
+                <img class="card-img '.$bad.'" src="/cardmaker/images/sq/cat_' . $bonus['id'] . '_sq.png" alt="Card image cap">
+                <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
+            ';
+        }
+    }
+
     $tag = '
     <div class="card print-card">
-        <div class="card-imgs">
-            <img class="card-img" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
-            <span class="points">+4</span>
-            <img class="card-img" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
-            <span class="points">+4</span>
-            <img class="card-img" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
-            <span class="points">+4</span>
-            <img class="card-img bad" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
-            <span class="points bad">+4</span>
+        <div class="card-imgs d-flex">
+            '. $bonus_tag .'
         </div>
         
         <div class="card-body">

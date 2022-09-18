@@ -29,7 +29,7 @@ https://getbootstrap.com/docs/4.0/components/card/#content-types
     <body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="../utils/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
-
+    
         <div class="print">
             <div class="">
                 <div class="d-flex">        
@@ -44,5 +44,6 @@ https://getbootstrap.com/docs/4.0/components/card/#content-types
                 </div>
             </div>
         </div>
+        
     </body>
 </html>
