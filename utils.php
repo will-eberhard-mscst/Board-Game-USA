@@ -208,6 +208,54 @@ function GetCategoryName($id){
     return $id;
 }
 
+/**
+Sorts the Points on a bonus or smear Descending.
+ */
+function sort_points($a, $b){
+    if ($a['points'] == $b['points']) return 0;
+    return ($a['points'] > $b['points']) ? -1 : 1;
+}
+
+
+/**
+ Returns the HTML for the Categories' images for a Position card's bonuses or smears.
+ @param array $category_array Array of Bonuses or Smears
+ */
+function GetPositionCardImages(Array $category_array){
+    $bonus_tag = '';
+    $i = 1;
+
+    //Sorts each Bonus or Smear by point value.
+    usort($category_array, "sort_points");
+
+    foreach($category_array as $bonus){
+        //Place a + sign if the points are positive:
+        $positive = $bonus['points'] >= 0;
+        $sign = $positive ? '+' : '&minus;';
+        //Add the bad class is the points are negative.
+        $bad = $positive ? '' : 'bad';
+
+        //Draw a div so each img-block is draw vertically.
+        //Start a new Div on each odd number:
+        if($i % 2 != 0) $bonus_tag .= '<div class="img-col">';
+
+        $bonus_tag .= '
+        <div class="img-block">
+            <img class="card-img '.$bad.'" src="/cardmaker/images/sq/cat_' . $bonus['id'] . '_sq.png" alt="Card image cap">
+            <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
+        </div>
+        ';
+
+        //close the div on each Even number.
+        if($i % 2 == 0) $bonus_tag .= '</div>';
+
+        $i++;
+    }
+    //If we ended on an even number, ensure we close the div.
+    if($i % 2 == 0) $bonus_tag .= '</div>';
+
+    return $bonus_tag;
+}
 
 /**
  Returns the HTML for drawing a Position card.
@@ -217,47 +265,11 @@ function GetPositionCard($position){
     $bonus_tag = '';
 
     if(isset($position['bonuses'])){
-        $i = 1;
-        foreach($position['bonuses'] as $bonus){
-            //Place a + sign if the points are positive:
-            $positive = $bonus['points'] >= 0;
-            $sign = $positive ? '+' : '&minus;';
-            //Add the bad class is the points are negative.
-            $bad = $positive ? '' : 'bad';
-
-            //Draw a div so each img-block is draw vertically.
-            //Start a new Div on each odd number:
-            if($i % 2 != 0) $bonus_tag .= '<div class="img-col">';
-
-            $bonus_tag .= '
-            <div class="img-block">
-                <img class="card-img '.$bad.'" src="/cardmaker/images/sq/cat_' . $bonus['id'] . '_sq.png" alt="Card image cap">
-                <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
-            </div>
-            ';
-
-            //close the div on each Even number.
-            if($i % 2 == 0) $bonus_tag .= '</div>';
-
-            $i++;
-        }
-        //If we ended on an even number, ensure we close the div.
-        if($i % 2 == 0) $bonus_tag .= '</div>';
+       $bonus_tag .= GetPositionCardImages($position['bonuses']);
     }
 
     if(isset($position['smears'])){
-        foreach($position['smears'] as $bonus){
-            //Place a + sign if the points are positive:
-            $positive = $bonus['points'] >= 0;
-            $sign = $positive ? '+' : '&minus;';
-            //Add the bad class is the points are negative.
-            $bad = $positive ? '' : 'bad';
-
-            $bonus_tag .= '
-                <img class="card-img '.$bad.'" src="/cardmaker/images/sq/cat_' . $bonus['id'] . '_sq.png" alt="Card image cap">
-                <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
-            ';
-        }
+        $bonus_tag .= GetPositionCardImages($position['smears']);
     }
 
     $tag = '
