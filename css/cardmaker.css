@@ -194,10 +194,20 @@ input[type='number']{
   font-weight: bold;
 }
 
-/*Print page*/
+/*---------------------Print page------------------------------------------------*/
 
+/*Enables the conatiner to wrap if the width is too long. */
+.d-flex{
+  flex-flow:row wrap;  
+}
 
-.print .card{
+@media print {
+  .print-card{
+    page-break-after: always;
+  }
+}
+
+.print-card{
   width: 63mm;
   height: 88mm;
   border: 2mm solid black;
@@ -207,7 +217,7 @@ input[type='number']{
 }
 
 /*Card text border.*/
-.print .card .card-text{
+.print-card .card-text{
   position:absolute; 
   top:38mm;
   left: 4mm;
@@ -229,11 +239,36 @@ input[type='number']{
 }
 
 /* Text within the card*/
-.print .card .card-text span{
+.print-card .card-text span{
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
   font-family: sans-serif;
   font-size: 3.5mm;
   line-height: 5mm;
+}
+
+/*Card imgs and their points*/
+.print-card .card-imgs{
+  margin-bottom: 4mm;
+  margin-left: 2mm;
+  margin-right: 2mm;  
+}
+
+.print-card .card-img{
+  width:15mm;
+  height:15mm;
+  margin-top: 2mm;
+}
+
+.print-card .points{
+  font-family: sans-serif;
+  font-size: 9mm;
+  vertical-align: middle;
+  color: #007ae5ff;
+}
+
+.bad{
+  filter: hue-rotate(150deg);
+  color: #007ae5ff;
 }

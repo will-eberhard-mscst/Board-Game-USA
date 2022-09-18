@@ -114,9 +114,9 @@ function AddSmear($position_no, $smear_no, $smear = null){
     ";
 }
 
-/*
-Add a Position tag:
-*/
+/**
+ Add a Position tag:
+ */
 function AddPosition(int $position_no, $position_card = null){
 
     $text = "";
@@ -191,6 +191,34 @@ function AddPosition(int $position_no, $position_card = null){
     
     return $tag;
 }
+
+
+/**
+ Returns the HTML for drawing a Position card.
+ */
+function GetPositionCard($position){
+    $tag = '
+    <div class="card print-card">
+        <div class="card-imgs">
+            <img class="card-img" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
+            <span class="points">+4</span>
+            <img class="card-img" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
+            <span class="points">+4</span>
+            <img class="card-img" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
+            <span class="points">+4</span>
+            <img class="card-img bad" src="/cardmaker/images/sq/cat_nat_sq.png" alt="Card image cap">
+            <span class="points bad">+4</span>
+        </div>
+        
+        <div class="card-body">
+            <p class="card-text"><span>"' .$position['text'] . '"</span></p>
+        </div>
+    </div>
+    ';
+
+    return $tag;
+}
+
 
 /*
 AJAX:

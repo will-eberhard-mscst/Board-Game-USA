@@ -1,4 +1,5 @@
 <?php
+require('utils.php');
 /*
 Date: 9/17/2022
 
@@ -15,28 +16,33 @@ https://getbootstrap.com/docs/4.0/components/card/#content-types
 */
 ?>
 
-<div class="print">
-    <div class="container">
-        <div class="d-flex">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Card Maker</title>
 
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text"><span>"The other day an officer went to Little Caesars and when he arrived home with his pizza, he found "F the Police" inscribed on the inside of the box! The amount of disrespect our men in blue are facing these days is ridiculous!"</span></p>
+        <link rel="stylesheet" href="../utils/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/cardmaker.css" />
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../utils/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+
+        <div class="print">
+            <div class="">
+                <div class="d-flex">        
+                    
+                    <?php
+                    foreach($positions as $pos)
+                    {
+                        echo GetPositionCard($pos);
+                    }
+                    ?>
+
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text"><span>"I will ban all off-shore drilling."</span></p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text"><span>"Our first priority needs to be solving the climate change crisis. By implementing a Carbon Tax, we can both dissuade environmentally unfriendly purchases, and fund efforts to switch America to renewable energies."</span></p>
-                </div>
-            </div>
-
         </div>
-    </div>
-</div>
+    </body>
+</html>

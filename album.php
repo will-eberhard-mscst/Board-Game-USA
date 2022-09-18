@@ -219,7 +219,10 @@ function DrawQuestionCard($question){
                     <label for="question2">Question</label>                
                 </div>
 
-                <div><input type="submit" name='search' value="Search" class='btn btn-info short'></div>
+                <div>
+                    <input type="submit" name='search' value="Search" class='btn btn-info short'>
+                    <input type='submit'class="btn btn-warning short" name='search' value='Print' formaction="/cardmaker/print.php">
+                </div>
             </form>
         </div>
 
