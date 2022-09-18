@@ -268,8 +268,13 @@ function GetPositionCard($position){
        $bonus_tag .= GetPositionCardImages($position['bonuses']);
     }
 
-    if(isset($position['smears'])){
+    //check if has smears
+    $hasSmears = isset($position['smears']) && count($position['smears']) > 0;
+    $smearCard = 'bonus-text';
+
+    if($hasSmears){
         $bonus_tag .= GetPositionCardImages($position['smears']);
+        $smearCard = 'smear-text';
     }
 
     $tag = '
@@ -279,7 +284,7 @@ function GetPositionCard($position){
         </div>
         
         <div class="card-body">
-            <p class="card-text"><span>"' .$position['text'] . '"</span></p>
+            <p class="card-text '. $smearCard .'"><span>"' .$position['text'] . '"</span></p>
         </div>
     </div>
     ';
