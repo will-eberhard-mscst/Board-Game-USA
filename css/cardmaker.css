@@ -207,6 +207,48 @@ input[type='number']{
   }
 }
 
+/*Question cards. These are Landscape cards.*/
+.print-qcard{
+  width: 88mm;
+  height: 63mm;
+  border: 2mm solid black;
+  border-radius: 2.7mm;
+  position: relative;
+  margin: 0mm;
+}
+
+.print-qcard .card-header, .print-qcard.qcard-back .card-header{
+  background-color: #a5a5a580;
+}
+
+.print-qcard .card-header, .print-qcard .list-group .list-group-item{
+  font-family: sans-serif;
+  font-size: 2.5mm;
+}
+
+.print-qcard.qcard-back .card-header{
+  line-height: 65px;
+}
+
+.print-qcard.qcard-back .child{
+  height: 16mm;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.print-qcard.qcard-back .answer-img{
+  width:10mm;
+  height:10mm;
+}
+
+/*Font and size for the back of the question card.*/
+.print-qcard.qcard-back .card-header, .print-qcard.qcard-back .list-group .list-group-item{
+  font-family: sans-serif;
+  font-size: 4.5mm;
+}
+
+
+/*Position cards*/
 .print-card{
   width: 63mm;
   height: 88mm;
@@ -233,7 +275,7 @@ input[type='number']{
   background-color: #cfc2bbff;
   border-radius: 2.7mm;
 
-  /*Used to Middle center the text.*/
+  /*Used to center the text.*/
   text-align: center;
 }
 
@@ -307,3 +349,4 @@ input[type='number']{
   margin-bottom: 0.5mm;
   width: 50%;
 }
+

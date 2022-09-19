@@ -296,6 +296,10 @@ function GetPositionCard($position){
     return $tag;
 }
 
+function GetQuestionCard(){
+
+}
+
 
 /*
 AJAX:

@@ -51,6 +51,36 @@ https://getbootstrap.com/docs/4.0/components/card/#content-types
                     }
                     ?>
 
+                    <div class="card print-qcard">
+                        <div class="card-header">
+                            "As President, you can either try to work across the aisle and move legislation or can fight partisan battles in the media, rake in the fundraising dollars, and become a major player in your party's politics. Which are you? A deal maker, or a partisan fighter?"
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">A. "I will always fight for the American people, but that doesn't mean you can't work together to get things done."</li>
+                            <li class="list-group-item">B. "Politics has gotten so divisive that we need to focus on getting things done. Americans are frustrated by the politics and want progress. The only way to get progress is by working together."</li>
+                            <li class="list-group-item">C. "Neither. What we need is a disrupter. I will do things that both sides hate in order to force them to work together."</li>
+                        </ul>
+                    </div>
+
+                    <div class="card print-qcard qcard-back">
+                        
+                        <div class="card-header">
+                            <div class="child">Answers</div>
+                        </div>
+                        
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                A.
+                                <img class="card-img answer-img" src="/cardmaker/images/svg/cat_nat_svg.svg" alt="Answer"> +4
+                                <img class="card-img answer-img" src="/cardmaker/images/svg/cat_nat_svg.svg" alt="Answer"> +4
+                                <img class="card-img answer-img" src="/cardmaker/images/svg/cat_nat_svg.svg" alt="Answer"> +4
+                                <img class="card-img answer-img" src="/cardmaker/images/svg/cat_nat_svg.svg" alt="Answer"> +4
+                            </li>
+                            <li class="list-group-item">B. <img class="card-img answer-img" src="/cardmaker/images/svg/cat_nat_svg.svg" alt="Answer"></li>
+                            <li class="list-group-item">C. <img class="card-img answer-img" src="/cardmaker/images/svg/cat_nat_svg.svg" alt="Answer"></li>
+                        </ul>
+                    </div>    
+
                 </div>
             </div>
         </div>
