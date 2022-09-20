@@ -296,7 +296,91 @@ function GetPositionCard($position){
     return $tag;
 }
 
-function GetQuestionCard(){
+
+/**
+Draw the Front side of a Question Card
+@param mixed $question Question card object.
+ */
+function GetQuestionCardFront($question){
+
+    //Array of characters:
+    $alpha = range('A', 'C');
+
+    $answers_tag = '';
+
+    $i = 0;
+    foreach($question['answers'] as $answer){
+        $answers_tag .= '<li class="list-group-item">'. $alpha[$i++] .' "'. $answer['text'] .'"</li>';
+    }
+
+    $tag = '
+    <div class="card print-qcard">
+        <div class="card-header">
+            "'. $question['text'] .'"
+        </div>
+        <ul class="list-group list-group-flush">
+            '. $answers_tag .'
+        </ul>
+    </div>
+    ';
+
+    return $tag;
+}
+
+/**
+Draw the Back side of a Question Card.
+Smears are ignored because they are not in use.
+@param mixed $question Question card object.
+*/
+function GetQuestionCardBack($question){
+
+    //Array of characters:
+    $alpha = range('A', 'C');
+
+    $answers_tag = '';
+
+    $i = 0;
+    foreach($question['answers'] as $answer){
+
+        $bonus_tag = '';
+
+        //Add each Bonus Category image
+        if(isset($answer['bonuses'])){
+
+            //Sorts each Bonus by point value.
+            usort($answer['bonuses'], "sort_points");
+
+            foreach($answer['bonuses'] as $bonus){
+
+                //Place a + sign if the points are positive:
+                $positive = $bonus['points'] >= 0;
+                $sign = $positive ? '+' : '&minus;';
+                //Add the bad class is the points are negative.
+                $bad = $positive ? '' : 'bad';
+                
+                $bonus_tag .= '
+                <img class="card-img answer-img '. $bad .'" src="/cardmaker/images/svg/cat_' . $bonus['id'] . '_svg.svg" alt="Answer">
+                <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span> 
+                ';
+            }
+        }
+
+        $answers_tag .= '<li class="list-group-item">'. $alpha[$i++] . '. ' . $bonus_tag .' </li>';
+    }
+
+    $tag = '
+    <div class="card print-qcard qcard-back">
+        <div class="card-header">
+            <div class="child">Answers</div>
+        </div>
+        
+        <ul class="list-group list-group-flush">
+            '. $answers_tag .'
+        </ul>
+    </div>
+    ';
+
+    return $tag;
 
 }
 
