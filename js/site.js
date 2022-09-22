@@ -172,7 +172,7 @@ function DeleteCard(uid, card_type){
 
         $.ajax({
             type: "POST",
-            url: 'album.php',
+            url: 'utils.php',
             data: {
                     'functionname': 'DeleteCard',
                     'data0': uid,
@@ -188,7 +188,7 @@ function DeleteCard(uid, card_type){
 
                 if(success && obj){
                     //delete the card element.
-                    elm.empty();
+                    elm.remove();
 
                     console.log(obj);
                 }

@@ -12,75 +12,10 @@ Feature:
     -   Both Position Cards and Question Cards.
 */
 
-/*
-AJAX:
-Get the function name that is trying to be called:
-*/
-if(isset($_POST['functionname'])){
 
-    $func = $_POST['functionname'];
 
-    switch($func){
-        case 'DeleteCard':
-            echo DeleteCard($_POST['data0'], $_POST['data1']);
-            break;
-    }
-
-    exit;
-}
-
-/*
-Delete a Card given the uid.
-Returns true if deleted.
-
-Card Type:
-0 = position
-1 = question
-*/
-function DeleteCard($uid, $card_type){
-    global $json_data;
-    $lang = $json_data['eng'];
-
-    $type = '';
-
-    switch($card_type){
-        case 0: $type = 'positions'; break;
-        case 1: $type = 'questions'; break;
-    }
-
-    $i = 0;
-    $array = $lang[$type];
-    foreach($array as $obj)
-    {
-        if($obj['uid'] == $uid){
-            //remove from the array.
-            array_splice($array, $i, 1);
-            //update the JSON file.
-            $json_data['eng'][$type] = $array;
-            return SaveFile($json_data);
-        }
-        $i++;
-    }
-    
-    return false;
-}
-
-/*
-Save the JSON file.
-Returns true on success, false on fail.
-*/
-function SaveFile($json_data){
-    global $json_filepath;
-
-    //Encode the JSON:
-    $new_json = json_encode($json_data);
-
-    //Update the Json file.
-    return file_put_contents($json_filepath, $new_json);
-}
-
-/*
-Draws a Position Card.
+/**
+Draws a Position Card data. For the purposes of the Album page.
 */
 function DrawPosCard($pos, bool $delete = true, $question_letter = ""){
 
@@ -139,8 +74,8 @@ function DrawPosCard($pos, bool $delete = true, $question_letter = ""){
     ";
 }
 
-/*
-Draw a Question card.
+/**
+Draw a Question card data. for the purposes of the Album page.
 */
 function DrawQuestionCard($question){
 
@@ -210,29 +145,47 @@ function DrawQuestionCard($question){
             </form>
         </div>
 
-        <div class='container'>
+        <div class=''>
             
             <h3>Positions:</h3>
             <div class='container totals'>
                 <div><strong>Postion Cards Found:</strong> <?=count($positions)?></div>
             </div>
-            <?php
-            foreach($positions as $pos)
-            {
-                DrawPosCard($pos);
-            }
-            ?>
+            <div class="d-flex">
+                <?php
+                foreach($positions as $pos)
+                {
+                    //DrawPosCard($pos);
+
+                    $uid = $pos['uid'];
+
+                    echo "<div class='album-group pos' id='$uid'>";
+                        echo GetPositionCard($pos);
+                        echo GetCardButtons($pos, 0);
+                    echo "</div>";
+                }
+                ?>
+            </div>
 
             <h3>Questions:</h3>
             <div class='container totals'>
                 <div><strong>Question Cards Found:</strong> <?=count($questions)?></div>
             </div>
-            <?php
-            foreach($questions as $que)
-            {
-                DrawQuestionCard($que);
-            }
-            ?>
+            <div class="d-flex">
+                <?php
+                foreach($questions as $que)
+                {
+                    //DrawQuestionCard($que);
+                    $uid = $que['uid'];
+
+                    echo "<div class='album-group que' id='$uid'>";
+                        echo GetQuestionCardFront($que);
+                        echo GetQuestionCardBack($que);
+                        echo GetCardButtons($que, 1);
+                    echo "</div>";
+                }
+                ?>
+            </div>
         </div>
 
     </div>

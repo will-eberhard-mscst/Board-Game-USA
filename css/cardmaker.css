@@ -123,13 +123,14 @@ input[type='number']{
   background-color: rgb(237, 246, 248);
 }
 
-/* Album page: */
+/*-------------------------------Album page:---------------------------------- */
 .album{
-  border: solid black 1px;
   border-radius: 10px;
   padding-bottom: 10px;
+  padding-top: 10px;
 }
 
+/*START this can be deleted: because we are no longer using this style.*/
 .pos-card{
   background-color: rgb(228, 241, 204);
   border-radius: 5px;
@@ -145,9 +146,29 @@ input[type='number']{
   border-radius: 5px;
   margin: 5px;
 }
+/*END deletion*/
 
 .short{
   width: 80px;
+}
+
+/*Contains the Card and its Buttons:*/
+.album-group{
+  border-radius: 5px;
+  padding: 3px;
+  margin: 2px;
+}
+
+.pos{
+  background-color: rgb(228, 241, 204);
+}
+
+.que{
+  background-color: rgb(204, 209, 241);
+}
+
+.album .que .print-qcard.qcard-back{
+  margin-top: 2px;
 }
 
 
@@ -327,11 +348,6 @@ input[type='number']{
   font-family: sans-serif;
   font-size: 9mm;
   vertical-align: middle;
-
-  /*The points needs to be the same width so that they look good when stacked
-  width: 10.5mm;
-  display: inline-block;
-  text-align: left;*/
 }
 
 /*Negative points and images will be drawn in red.*/

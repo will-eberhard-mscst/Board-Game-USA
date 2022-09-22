@@ -20,8 +20,21 @@ $positions = $lang['positions'];
 $questions = $lang['questions'];
 
 
+/**
+Save the JSON file.
+Returns true on success, false on fail.
+*/
+function SaveFile($json_data){
+    global $json_filepath;
 
-/*
+    //Encode the JSON:
+    $new_json = json_encode($json_data);
+
+    //Update the Json file.
+    return file_put_contents($json_filepath, $new_json);
+}
+
+/**
 Returns the Categories and sets one as the Selected option.
 If no cat_id is entered, none will be selected.
 */
@@ -50,7 +63,7 @@ function GetCategories($cat_id = ""){
 }
 
 
-/*
+/**
 Add a Bonus tag:
 */
 function AddBonus($position_no, $bonus_no, $bonus = null){
@@ -82,7 +95,7 @@ function AddBonus($position_no, $bonus_no, $bonus = null){
     ";
 }
 
-/*
+/**
 Add a Smear tag:
 */
 function AddSmear($position_no, $smear_no, $smear = null){
@@ -384,6 +397,61 @@ function GetQuestionCardBack($question){
 
 }
 
+/**
+Delete a Card given the uid.
+Returns true if deleted.
+
+Card Type:
+0 = position
+1 = question
+*/
+function DeleteCard($uid, $card_type){
+    global $json_data;
+    $lang = $json_data['eng'];
+
+    $type = '';
+
+    switch($card_type){
+        case 0: $type = 'positions'; break;
+        case 1: $type = 'questions'; break;
+    }
+
+    $i = 0;
+    $array = $lang[$type];
+    foreach($array as $obj)
+    {
+        if($obj['uid'] == $uid){
+            //remove from the array.
+            array_splice($array, $i, 1);
+            //update the JSON file.
+            $json_data['eng'][$type] = $array;
+            return SaveFile($json_data);
+        }
+        $i++;
+    }
+    
+    return false;
+}
+
+
+/**
+ * Returns the Edit and Delete buttons for the given card.
+ * @param int $card_type 0 = position, 1 = question
+ */
+function GetCardButtons($card, int $card_type){
+
+    $uid = $card['uid'];
+
+    $tag = "
+    <div align='center'>
+        <input type='button' value='Delete' class='btn btn-danger short' onclick='DeleteCard($uid, $card_type)'>
+        <a class='btn btn-success short' href='?page=add&uid=$uid'>Edit</a>
+    </div>
+    ";
+
+    return $tag;
+}
+
 
 /*
 AJAX:
@@ -404,6 +472,10 @@ if(isset($_POST['functionname'])){
 
         case 'AddPosition':
             echo AddPosition($_POST['data0']);
+            break;
+
+        case 'DeleteCard':
+            echo DeleteCard($_POST['data0'], $_POST['data1']);
             break;
     }
 }
