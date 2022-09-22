@@ -323,7 +323,7 @@ function GetQuestionCardFront($question){
 
     $i = 0;
     foreach($question['answers'] as $answer){
-        $answers_tag .= '<li class="list-group-item">'. $alpha[$i++] .' "'. $answer['text'] .'"</li>';
+        $answers_tag .= '<li class="list-group-item"><b>'. $alpha[$i++] .'.</b> "'. $answer['text'] .'"</li>';
     }
 
     $tag = '
@@ -378,7 +378,7 @@ function GetQuestionCardBack($question){
             }
         }
 
-        $answers_tag .= '<li class="list-group-item">'. $alpha[$i++] . '. ' . $bonus_tag .' </li>';
+        $answers_tag .= '<li class="list-group-item"><b>'. $alpha[$i++] . '.</b> ' . $bonus_tag .' </li>';
     }
 
     $tag = '
@@ -446,6 +446,7 @@ function GetCardButtons($card, int $card_type){
     <div align='center'>
         <input type='button' value='Delete' class='btn btn-danger short' onclick='DeleteCard($uid, $card_type)'>
         <a class='btn btn-success short' href='?page=add&uid=$uid'>Edit</a>
+        <span><b>$uid</b></span>
     </div>
     ";
 
