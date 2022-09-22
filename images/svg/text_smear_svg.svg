@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="26.261mm"
-   height="5.5mm"
-   viewBox="0 0 26.261 5.5"
+   width="100mm"
+   height="21mm"
+   viewBox="0 0 100 21"
    version="1.1"
    id="svg26545"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="38.817871"
-     inkscape:cy="26.983325"
+     inkscape:zoom="2"
+     inkscape:cx="172.32708"
+     inkscape:cy="158.76033"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -46,7 +46,7 @@
        id="guide31046"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="-1.3096207,11.786586"
+       position="0.1405599,21.000268"
        orientation="0,1"
        id="guide31048"
        inkscape:locked="false" />
@@ -64,7 +64,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -72,20 +72,20 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-291.5)">
+     transform="translate(0,-276)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot20355-5-1-4"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Splatch;-inkscape-font-specification:Splatch;letter-spacing:0px;word-spacing:0px;display:inline;fill:#0e0e0e;fill-opacity:1;stroke:none;"
-       transform="matrix(0.25610985,0,0,0.25610985,136.75599,69.865091)"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Splatch;-inkscape-font-specification:Splatch;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.97525919,0,0,0.97787397,520.72869,-570.3313)"><flowRegion
          id="flowRegion20357-1-2-6"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Splatch;-inkscape-font-specification:Splatch;fill:#0e0e0e;fill-opacity:1;"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Splatch;-inkscape-font-specification:Splatch;fill:#000000;fill-opacity:1"><rect
            id="rect20359-0-7-8"
            width="200.35458"
            height="30.004768"
            x="-582.85455"
            y="869"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Splatch;-inkscape-font-specification:Splatch;fill:#0e0e0e;fill-opacity:1;" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Splatch;-inkscape-font-specification:Splatch;fill:#000000;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara20361-21-5-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Splatch;-inkscape-font-specification:Splatch;text-align:center;text-anchor:middle;fill:#0e0e0e;fill-opacity:1;">&lt;SMEAR&gt;</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Splatch;-inkscape-font-specification:Splatch;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1">&lt;SMEAR&gt;</flowPara></flowRoot>  </g>
 </svg>
