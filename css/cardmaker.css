@@ -222,11 +222,22 @@ input[type='number']{
   flex-flow:row wrap;  
 }
 
+/*When printing the cards, give some margin bottom so we can have a page break.*/
 @media print {
-  .print-card{
-    page-break-after: always;
+  .card.print-card:nth-child(8n+8){
+    margin-bottom: 20mm;
+  }
+
+  .card.print-qcard:nth-child(8n+8){
+    margin-bottom: 10mm;
+  }
+
+  /*For test printing, use less ink for the borders:*/
+  .card.print-card, .card.print-qcard{
+    border: 0.5mm solid rgb(148, 133, 133);
   }
 }
+
 
 /*Question cards. These are Landscape cards.*/
 .print-qcard{

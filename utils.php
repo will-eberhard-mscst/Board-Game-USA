@@ -290,7 +290,7 @@ function GetPositionCard($position){
     if($hasSmears){
         $bonus_tag .= GetPositionCardImages($position['smears']);
         $position_type = 'smear-text';
-        $position_name = '<img class="card-img position-img" src="/cardmaker/images/smear_text.png" alt="Smear">';
+        $position_name = '<img class="card-img position-img" src="/cardmaker/images/svg/text_smear.svg" alt="Smear">';
     }
 
     $tag = '
