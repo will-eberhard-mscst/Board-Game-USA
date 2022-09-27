@@ -229,6 +229,14 @@ function sort_points($a, $b){
     return ($a['points'] > $b['points']) ? -1 : 1;
 }
 
+/**
+Sorts the cards by UID Ascending.
+ */
+function sort_uid($a, $b){
+    if ($a['uid'] == $b['uid']) return 0;
+    return ($a['uid'] < $b['uid']) ? -1 : 1;
+}
+
 
 /**
  Returns the HTML for the Categories' images for a Position card's bonuses or smears.
@@ -611,5 +619,9 @@ if(isset($_GET["search"]))
     }
 
 }
+
+//Sort the cards by their UID.
+usort($positions, "sort_uid");
+usort($questions, "sort_uid");
 
 ?>
