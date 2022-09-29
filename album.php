@@ -138,6 +138,16 @@ function DrawQuestionCard($question){
                     <label for="question2">Question</label>                
                 </div>
 
+                <div><label>Sub Type:</label></div>
+                <div>
+                    <input type="radio" name="subtype" id="subboth" value="Both" checked>
+                    <label for="subboth">Both</label> 
+                    <input type="radio" name="subtype" id="bonus" value="Bonus" <?php if($sub_type == "Bonus") echo "checked"; ?> >
+                    <label for="bonus">Bonus</label>
+                    <input type="radio" name="subtype" id="smear" value="Smear" <?php if($sub_type == "Smear") echo "checked"; ?>>
+                    <label for="smear">Smear</label>                
+                </div>
+
                 <div>
                     <input type="submit" name='search' value="Search" class='btn btn-info short'>
                     <input type='submit'class="btn btn-warning short" name='search' value='Print' formaction="/cardmaker/print.php">

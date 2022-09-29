@@ -1,6 +1,9 @@
 <?php
 /*
 This file will be required by add.php and edit.php
+
+More question cards here:
+https://www.c-span.org/video/?521448-1/alaska-us-house-large-debate
 */
 
 //Read the JSON file
@@ -236,6 +239,7 @@ function sort_uid($a, $b){
     if ($a['uid'] == $b['uid']) return 0;
     return ($a['uid'] < $b['uid']) ? -1 : 1;
 }
+
 
 
 /**
@@ -491,6 +495,22 @@ if(isset($_POST['functionname'])){
 
 
 
+/**
+ * Used in array_filter. 
+ * Keep all cards that have at least one bonus.
+ */
+function filter_sub_bonus($card){
+    return count($card['bonuses']) > 0;
+}
+
+/**
+ * Used in array_filter. 
+ * Keep all cards that have at least one smear
+ */
+function filter_sub_smear($card){
+    return isset($card['smears']) && count($card['smears']) > 0;
+}
+
 /*
 Check for Search queries.
 -   Search position text, question text, and answer text. Using the same search field.
@@ -500,6 +520,10 @@ Check for Search queries.
 $category = isset($_GET['category']) ? $_GET['category'] : "";
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 $card_type = isset($_GET['card_type']) ? $_GET['card_type'] : "";
+$sub_type = isset($_GET['subtype']) ? $_GET['subtype'] : "";
+
+$findBonus = $sub_type == "Bonus";
+$findSmear = $sub_type == "Smear";
 
 if(isset($_GET["search"]))
 {
@@ -513,6 +537,8 @@ if(isset($_GET["search"]))
         $positions = array();
     }
 
+    
+
     //Search for Bonus or Smear categories
     if(isset($_GET['category']) && !empty($_GET['category'])){
 
@@ -521,6 +547,7 @@ if(isset($_GET["search"]))
 
         //Need to check both Bonuses and Smears for the category:
         foreach($positions as $pos){
+            
             foreach($pos['bonuses'] as $obj){
                 if($obj['id'] == $category){
                     $filtered_positions[] = $pos;
@@ -557,14 +584,14 @@ if(isset($_GET["search"]))
                         break;
                     }
                 }
-
+                
                 foreach($answer['smears'] as $obj){
                     if($obj['id'] == $category){
                         $filtered_questions[] = $que;
                         $que_added = true;
                         break;
                     }
-                }
+                }                
 
                 //If the question was added once, break out of the answers loop.
                 if($que_added) break;
@@ -616,6 +643,18 @@ if(isset($_GET["search"]))
         
 
         $questions = $filtered_questions;
+    }
+
+
+    /*
+    Filter the cards for their sub types:
+    Question cards are not included because they do not have sub types.
+    */
+    if($findBonus){
+        $positions = array_filter($positions, "filter_sub_bonus");
+    }
+    if($findSmear){
+        $positions = array_filter($positions, "filter_sub_smear");
     }
 
 }
