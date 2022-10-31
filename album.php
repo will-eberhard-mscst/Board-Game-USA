@@ -121,6 +121,12 @@ function DrawQuestionCard($question){
                 <div><label for='keyword'>Keyword:</label></div>
                 <div><input type='text' name='keyword' value='<?=$keyword?>'></div>
 
+                <div><label for='id_is'>ID is:</label></div>
+                <div><input type='number' name='id_is' class='long' value='<?=$id_is?>'></div>
+
+                <div><label for='greater-than-id'>ID Greater Than:</label></div>
+                <div><input type='number' name='greater-than-id' class='long' value='<?=$greater_than_id?>'></div>
+
                 <div><label for='category'>Category:</label></div>
                 <div>
                     <select class='chosen-select' name='category'>

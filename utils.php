@@ -511,6 +511,24 @@ function filter_sub_smear($card){
     return isset($card['smears']) && count($card['smears']) > 0;
 }
 
+/**
+ * Used in array_filter.
+ * Keeps all the cards with an ID greater than this value.
+ */
+function filter_greater_than_id($card){
+    global $greater_than_id;
+    return $card['uid'] > $greater_than_id;
+}
+
+/**
+ * Used in array_filter
+ * Keeps the card with the given ID.
+ */
+function filter_id_is($card){
+    global $id_is;
+    return $card['uid'] == $id_is;
+}
+
 /*
 Check for Search queries.
 -   Search position text, question text, and answer text. Using the same search field.
@@ -519,6 +537,8 @@ Check for Search queries.
 */
 $category = isset($_GET['category']) ? $_GET['category'] : "";
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+$id_is = isset($_GET['id_is']) ? $_GET['id_is'] : "";
+$greater_than_id = isset($_GET['greater-than-id']) ? $_GET['greater-than-id'] : "";
 $card_type = isset($_GET['card_type']) ? $_GET['card_type'] : "";
 $sub_type = isset($_GET['subtype']) ? $_GET['subtype'] : "";
 
@@ -537,6 +557,19 @@ if(isset($_GET["search"]))
         $positions = array();
     }
 
+
+
+    //Return the cards with the given ID.
+    if(!empty($id_is)){
+        $positions = array_filter($positions, "filter_id_is");
+        $questions = array_filter($questions, "filter_id_is");
+    }
+
+    //Return the Cards with the ID > the given value:
+    if(!empty($greater_than_id)){
+        $positions = array_filter($positions, "filter_greater_than_id");
+        $questions = array_filter($questions, "filter_greater_than_id");
+    }
     
 
     //Search for Bonus or Smear categories

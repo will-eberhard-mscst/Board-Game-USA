@@ -100,13 +100,16 @@ h3[class='heading']{
   margin-bottom: 10px;
 }
 
-input[type='text'], input[type='button'].long, input[type='submit'].long, select, textarea{
-  width: 100%;
-}
-
 input[type='number']{
   max-width: 50px;
 }
+
+input[type='text'], input[type='button'].long, input[type='submit'].long, input[type='number'].long, select, textarea{
+  width: 100%;
+  max-width: none;
+}
+
+
 
 .create .container{
   border: solid black 1px;
