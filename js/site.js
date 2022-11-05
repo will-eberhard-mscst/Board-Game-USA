@@ -163,7 +163,7 @@ $('#question').click(function() {
  /*
  -----------------------------------------album.php JS -------------------------------------------------
  */
-/*
+/**
 Delete a Card permanently
 */
 function DeleteCard(uid, card_type){
@@ -202,6 +202,19 @@ function DeleteCard(uid, card_type){
     }
 }
 
+/**
+ * Turns a Card into an image:
+ */
+function ImageCard(uid){
+
+    var id = $('#'+ uid +'');
+    var elm = $('#'+ uid +' .card');
+
+    html2canvas(elm[0]).then(image => {
+        id.append(image);
+    });
+}
+
 /*
 --------------------------------stats.php---------------------------
 */
@@ -217,3 +230,5 @@ $('table.smear').dataTable({
     //sort by second column by default:
     order: [[2,'desc']]
 });
+
+

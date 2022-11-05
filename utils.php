@@ -456,8 +456,9 @@ function GetCardButtons($card, int $card_type){
 
     $tag = "
     <div align='center'>
-        <input type='button' value='Delete' class='btn btn-danger short' onclick='DeleteCard($uid, $card_type)'>
-        <a class='btn btn-success short' href='?page=add&uid=$uid'>Edit</a>
+        <input type='button' value='X' class='btn btn-danger card-button' onclick='DeleteCard($uid, $card_type)'>
+        <a class='btn btn-success card-button' href='?page=add&uid=$uid'>Edit</a>
+        <input type='button' value='PNG' class='btn btn-info card-button' onclick='ImageCard($uid)'>
         <span><b>$uid</b></span>
     </div>
     ";

@@ -156,6 +156,10 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
   width: 80px;
 }
 
+.card-button{
+  width: 60px;
+}
+
 /*Contains the Card and its Buttons:*/
 .album-group{
   border-radius: 5px;

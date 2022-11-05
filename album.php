@@ -10,8 +10,27 @@ Feature:
 -   Delete a card
 -   Edit a Card
     -   Both Position Cards and Question Cards.
-*/
 
+Convert cards to PNG/JPG: 
+-   Remove card border
+-   Remove text background color
+-   For the entire card use a given SVG for the image background
+-   Size: W 10.88" X H 14.8"
+*/
+// $my_img = imagecreate( 200, 80 );
+// $background = imagecolorallocate( $my_img, 0, 0, 255 );
+// $text_color = imagecolorallocate( $my_img, 255, 255, 0 );
+// $line_color = imagecolorallocate( $my_img, 128, 255, 0 );
+// imagestring( $my_img, 4, 30, 25, "thesitewizard.com", $text_color );
+// imagesetthickness ( $my_img, 5 );
+// imageline( $my_img, 30, 45, 165, 45, $line_colour );
+
+// header( "Content-type: image/png" );
+// imagepng( $my_img );
+// imagecolordeallocate( $line_color );
+// imagecolordeallocate( $text_color );
+// imagecolordeallocate( $background );
+// imagedestroy( $my_img );
 
 
 /**
@@ -109,7 +128,7 @@ function DrawQuestionCard($question){
 
 ?>
 
-<div class='album'>
+<div class='album' id="capture">
     <div class='container'>
         <h2 class="alert alert-primary">Card Album</h2>
 
