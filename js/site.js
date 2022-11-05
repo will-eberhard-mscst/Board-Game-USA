@@ -204,13 +204,19 @@ function DeleteCard(uid, card_type){
 
 /**
  * Turns a Card into an image:
+ * http://html2canvas.hertzen.com/configuration/
  */
 function ImageCard(uid){
 
     var id = $('#'+ uid +'');
     var elm = $('#'+ uid +' .card');
 
-    html2canvas(elm[0]).then(image => {
+    var options ={
+        backgroundColor: null //transparent background
+        ,scale: 8 //Image scaling/resolution
+    }
+
+    html2canvas(elm[0], options).then(image => {
         id.append(image);
     });
 }
