@@ -176,6 +176,7 @@ function DrawQuestionCard($question){
                 <div>
                     <input type="submit" name='search' value="Search" class='btn btn-info short'>
                     <input type='submit'class="btn btn-warning short" name='search' value='Print' formaction="/cardmaker/print.php">
+                    <input type='button' value='Download' class='btn btn-danger' onclick='DownloadAll()'>
                 </div>
             </form>
         </div>

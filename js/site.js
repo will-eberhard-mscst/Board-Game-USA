@@ -202,13 +202,15 @@ function DeleteCard(uid, card_type){
     }
 }
 
-/**
- * Turns a Card into an image:
- * http://html2canvas.hertzen.com/configuration/
- */
-function ImageCard(uid){
 
-    var id = $('#'+ uid +'');
+/**
+ * Converts the given Card UID to an Image file.
+ * http://html2canvas.hertzen.com/configuration/
+ * @param {int} uid 
+ * @returns 
+ */
+async function cardToImage(uid){
+
     var elm = $('#'+ uid +' .card');
 
     var options ={
@@ -216,10 +218,69 @@ function ImageCard(uid){
         ,scale: 8 //Image scaling/resolution
     }
 
-    html2canvas(elm[0], options).then(image => {
-        id.append(image);
+    var image = await html2canvas(elm[0], options).then(image => {
+        return image;
     });
+
+    return image;
 }
+
+/**
+ * Allows the user to download a single card as an Image:
+ */
+async function ImageCard(uid){
+
+    var image = await cardToImage(uid);
+        
+    //Convert the image to a PNG file and download it.
+    var a = document.createElement('a');
+    // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+    a.href = image.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    a.download = 'card'+ uid +'.png';
+    a.click();
+}
+
+
+/**
+ * Returns a Zip file containing all the cards that the user has searched for.
+ * @returns JSZip
+ */
+async function ZipAll(){
+
+    var zip = new JSZip();
+
+    for(var i = 31; i < 40; i++){
+        console.log("loop" + i);
+
+        //Convert the card to an Image:
+        var image = await cardToImage(i);
+
+        //Get the Blob from the Image:
+        var blob = await new Promise(resolve => image.toBlob(resolve) );
+        //saves the blob as a PNG:
+        await zip.file("card"+ i +".png", blob);
+    }
+
+    return zip;
+}
+
+/**
+ * Download all the cards that the user has searched for as PNGs
+ */
+async function DownloadAll(){
+
+    var zip = await ZipAll();
+
+    await zip.generateAsync({type:"blob"}).then(
+        function (blob) { // 1) generate the zip file
+            saveAs(blob, "cards.zip");// 2) trigger the download
+        }, 
+        function (err) {
+            jQuery("#blob").text(err);
+        }
+    );
+}
+
 
 /*
 --------------------------------stats.php---------------------------
