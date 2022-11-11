@@ -113,8 +113,8 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 .create .container{
   border: solid black 1px;
-  border-radius: 10px;
   padding-bottom: 10px;
+  border-radius: 5px;
 }
 
 
@@ -137,7 +137,6 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 /*START this can be deleted: because we are no longer using this style.*/
 .pos-card{
   background-color: rgb(228, 241, 204);
-  border-radius: 5px;
   margin: 5px;
 }
 
@@ -147,7 +146,6 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 .que-card, .que-card .pos-card{
   background-color: rgb(204, 209, 241);
-  border-radius: 5px;
   margin: 5px;
 }
 /*END deletion*/
@@ -249,12 +247,17 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 /*Question cards. These are Landscape cards.*/
 .print-qcard{
-  width: 88mm;
-  height: 63mm;
-  border: 2mm solid black;
-  border-radius: 2.7mm;
+  height: 2.72in;
+  width: 3.7in;
+  border: 2mm solid transparent;
+  border-radius: 0mm;
   position: relative;
-  margin: 0mm;
+  
+  /*Padding for bleed area:*/
+  padding-top: 3.044mm;
+  padding-bottom: 3.044mm;
+  padding-left: 2.99mm;
+  padding-right: 2.99mm;  
 }
 
 .print-qcard .card-header, .print-qcard.qcard-back .card-header{
@@ -264,6 +267,12 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 .print-qcard .card-header, .print-qcard .list-group .list-group-item{
   font-family: sans-serif;
   font-size: 3mm;
+}
+
+/*Reduce the padding from the top left for the Front of Question cards:*/
+.qcard-front .card-header, .qcard-front .list-group .list-group-item{
+  padding-top: 1.5mm;
+  padding-left: 2mm;  
 }
 
 .print-qcard.qcard-back .card-header{
@@ -290,10 +299,10 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 /*Position cards*/
 .print-card{
-  width: 63mm;
-  height: 88mm;
-  border: 2mm solid black;
-  border-radius: 2.7mm;
+  width: 2.72in;
+  height: 3.7in;
+  border: 2mm solid transparent;
+  border-radius: 0mm;
   position: relative;
   margin: 0mm;
 }
@@ -301,8 +310,8 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 /*Card text border.*/
 .print-card .card-text{
   position:absolute; 
-  top:38mm;
-  left: 4mm;
+  top: 40.99mm;
+  left: 7.044mm;
   width: 55mm;
 
   margin-top: -1.5mm;
@@ -342,9 +351,10 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 /*Card imgs and their points*/
 .print-card .card-imgs{
+  margin-top: 3mm;
   margin-bottom: 4mm;
-  margin-left: 2mm;
-  margin-right: 2mm;  
+  margin-left: 5.044mm;
+  margin-right: 5.044mm;  
   display: inline;
 }
 

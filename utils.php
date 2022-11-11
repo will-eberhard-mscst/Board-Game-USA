@@ -339,7 +339,7 @@ function GetQuestionCardFront($question){
     }
 
     $tag = '
-    <div class="card print-qcard">
+    <div class="card print-qcard qcard-front">
         <div class="card-header">
             "'. $question['text'] .'"
         </div>
@@ -454,11 +454,27 @@ function GetCardButtons($card, int $card_type){
 
     $uid = $card['uid'];
 
+    $image_btn = "";
+
+    //Change the image download buttons based on the card type:
+    switch($card_type){
+        case 0:
+            $image_btn = "<input type='button' value='PNG' class='btn btn-info card-button' onclick='ImageCard($uid, 0)'>";
+            break;
+
+        case 1:
+            $image_btn = "
+                <input type='button' value='PNG Front' class='btn btn-info' onclick='ImageCard($uid, 0)'>
+                <input type='button' value='PNG Back' class='btn btn-info' onclick='ImageCard($uid, 1)'>
+                ";
+            break;
+    }
+
     $tag = "
     <div align='center'>
         <input type='button' value='X' class='btn btn-danger card-button' onclick='DeleteCard($uid, $card_type)'>
         <a class='btn btn-success card-button' href='?page=add&uid=$uid'>Edit</a>
-        <input type='button' value='PNG' class='btn btn-info card-button' onclick='ImageCard($uid)'>
+        $image_btn
         <span><b>$uid</b></span>
     </div>
     ";

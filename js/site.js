@@ -81,7 +81,7 @@ function AddSmear(position_no){
 /*
 Call the add position function from PHP
 */
-function AddPosition(position_no){
+async function AddPosition(position_no){
 
     $.ajax({
         type: "POST",
@@ -207,9 +207,10 @@ function DeleteCard(uid, card_type){
  * Converts the given Card UID to an Image file.
  * http://html2canvas.hertzen.com/configuration/
  * @param {int} uid 
+ * @param {int} i The index of the element to return. Enter 0 for the first element.
  * @returns 
  */
-async function cardToImage(uid){
+async function cardToImage(uid, i){
 
     var elm = $('#'+ uid +' .card');
 
@@ -218,7 +219,7 @@ async function cardToImage(uid){
         ,scale: 8 //Image scaling/resolution
     }
 
-    var image = await html2canvas(elm[0], options).then(image => {
+    var image = await html2canvas(elm[i], options).then(image => {
         return image;
     });
 
@@ -227,16 +228,19 @@ async function cardToImage(uid){
 
 /**
  * Allows the user to download a single card as an Image:
+ * Enter 0 for Front, enter 1 for Back of the card.
  */
-async function ImageCard(uid){
+async function ImageCard(uid, i){
 
-    var image = await cardToImage(uid);
+    var image = await cardToImage(uid, i);
+
+    var type = i == 0 ? "front" : "back";
         
     //Convert the image to a PNG file and download it.
     var a = document.createElement('a');
     // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
     a.href = image.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    a.download = 'card'+ uid +'.png';
+    a.download = 'card'+ uid + type+'.png';
     a.click();
 }
 
@@ -253,7 +257,7 @@ async function ZipAll(){
         console.log("loop" + i);
 
         //Convert the card to an Image:
-        var image = await cardToImage(i);
+        var image = await cardToImage(i, 0);
 
         //Get the Blob from the Image:
         var blob = await new Promise(resolve => image.toBlob(resolve) );
