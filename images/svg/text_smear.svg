@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100mm"
-   height="21mm"
-   viewBox="0 0 100 21"
+   width="1271mm"
+   height="267mm"
+   viewBox="0 0 1271 267"
    version="1.1"
    id="svg4800"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -75,11 +75,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.1767767"
-     inkscape:cx="1640.248"
-     inkscape:cy="909.78227"
+     inkscape:zoom="0.125"
+     inkscape:cx="1795.9502"
+     inkscape:cy="1686.8497"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer25"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -87,9 +87,10 @@
      inkscape:window-height="1057"
      inkscape:window-x="57"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     guidetolerance="22">
     <sodipodi:guide
-       position="65.701416,21.000268"
+       position="-0.088883467,266.99973"
        orientation="0,1"
        id="guide9331"
        inkscape:locked="false" />
@@ -115,7 +116,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-276)"
+     transform="translate(0,-30)"
      style="display:inline">
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:0;stroke:none;stroke-width:2.66915154;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
@@ -124,24 +125,18 @@
        height="1.7678976"
        x="62.481136"
        y="133.40985" />
-    <rect
-       style="opacity:1;fill:#767676;fill-opacity:0.39393945;stroke:none;stroke-width:0.69999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
-       id="rect9293"
-       width="35.907738"
-       height="41.577381"
-       x="35.151787"
-       y="125.39881" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer25"
      inkscape:label="Layer 2"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(0,246)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot20355-5-1-0-2-6-0"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Splatch;-inkscape-font-specification:Splatch;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:url(#linearGradient20835);fill-opacity:1;stroke:#0cb81c;stroke-opacity:1;enable-background:new"
-       transform="matrix(0.9659973,0,0,0.9336514,516.29114,-807.49984)"
+       transform="matrix(12.277805,0,0,11.870804,6562.0413,-10512.74)"
        inkscape:export-filename="C:\Users\funfu\Documents\0_Boardgame\Board-Game-USA\images\test\testcard4.png"
        inkscape:export-xdpi="299.96176"
        inkscape:export-ydpi="299.96176"><flowRegion
