@@ -130,10 +130,14 @@ if(isset($_POST["submit"]))
     Get the last Card uid
     The uid is unique to every card and position.
     */
-    $uid = $json_data['card_uid_counter'];
+    $new_uid = $json_data['card_uid_counter'];    
+    
+    //If edit, use the existing UID, else use the new UID.
+    $uid = $isEdit ? $_GET['uid'] : $new_uid;
 
     //Whatever the uid is now is our card's uid.
     $card_uid = $uid;    
+
     
 
     //Array that contains the type of card we want to upload:
@@ -154,8 +158,14 @@ if(isset($_POST["submit"]))
                 exit;
             }
 
+            //If this is a new card, use the new UID then + 1 afterwards.
+            if(!$isEdit) $uid = $new_uid++;
+
             //Create a new question using the Question Text.
-            $question = new Question($uid++, $_POST['question_text']);
+            $question = new Question($uid, $_POST['question_text']);
+
+            //If this IS an Edit, set the next UID to the new UID.
+            if($isEdit) $uid = $new_uid;
 
             //We will use the Answers array to get the positions in this case:
             $array = $question->answers;
@@ -201,7 +211,7 @@ if(isset($_POST["submit"]))
             $i++;
         }
     }
-   
+
 
     //Each text is an indicator of how many Positions exist.
     $i = 0;
@@ -229,8 +239,8 @@ if(isset($_POST["submit"]))
     }
     
 
-    //Update the uid counter:
-    $json_data['card_uid_counter'] = $uid;
+    //Update the uid counter if the UID is greater than the last one:
+    if($uid > $json_data['card_uid_counter']) $json_data['card_uid_counter'] = $uid;
 
 
     //Update the array in the JSON data:
@@ -254,12 +264,11 @@ if(isset($_POST["submit"]))
         echo "<div class='alert alert-success'>Card added successfully!</div>";
 
         //If this was an edit, update the page with the current card values OR redirect to Album.
-        if($isEdit){
+        //if($isEdit){
             //redirect to the album page.
-            header("Location: ?page=album");
-            //Edits are given a New UID.
+            //header("Location: ?page=album");
             //header("Location: ?page=add&uid=$card_uid");
-        }
+        //}
     }
     else {
         echo "<div class='alert alert-danger'>Uh-Oh! Error when updating json file!</div>";

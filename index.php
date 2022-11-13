@@ -18,6 +18,9 @@ require('classes/card.php');
     <script src="../utils/bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../utils/chosen/chosen.jquery.min.js"></script>
     <script type="text/javascript" src="../utils/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="js/html2canvas.min.js"></script>
+    <script type="text/javascript" src="../utils/Stuk-jszip-2ceb998/dist/jszip.min.js"></script>
+    <script type="text/javascript" src="../utils/FileSaver.js-master/dist/FileSaver.min.js"></script>
     
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">

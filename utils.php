@@ -1,6 +1,9 @@
 <?php
 /*
 This file will be required by add.php and edit.php
+
+More question cards here:
+https://www.c-span.org/video/?521448-1/alaska-us-house-large-debate
 */
 
 //Read the JSON file
@@ -229,6 +232,15 @@ function sort_points($a, $b){
     return ($a['points'] > $b['points']) ? -1 : 1;
 }
 
+/**
+Sorts the cards by UID Ascending.
+ */
+function sort_uid($a, $b){
+    if ($a['uid'] == $b['uid']) return 0;
+    return ($a['uid'] < $b['uid']) ? -1 : 1;
+}
+
+
 
 /**
  Returns the HTML for the Categories' images for a Position card's bonuses or smears.
@@ -290,7 +302,7 @@ function GetPositionCard($position){
     if($hasSmears){
         $bonus_tag .= GetPositionCardImages($position['smears']);
         $position_type = 'smear-text';
-        $position_name = '<img class="card-img position-img" src="/cardmaker/images/smear_text.png" alt="Smear">';
+        $position_name = '<img class="card-img position-img" src="/cardmaker/images/svg/text_smear.svg" alt="Smear">';
     }
 
     $tag = '
@@ -327,7 +339,7 @@ function GetQuestionCardFront($question){
     }
 
     $tag = '
-    <div class="card print-qcard">
+    <div class="card print-qcard qcard-front">
         <div class="card-header">
             "'. $question['text'] .'"
         </div>
@@ -442,10 +454,27 @@ function GetCardButtons($card, int $card_type){
 
     $uid = $card['uid'];
 
+    $image_btn = "";
+
+    //Change the image download buttons based on the card type:
+    switch($card_type){
+        case 0:
+            $image_btn = "<input type='button' value='PNG' class='btn btn-info card-button' onclick='ImageCard($uid, 0)'>";
+            break;
+
+        case 1:
+            $image_btn = "
+                <input type='button' value='PNG Front' class='btn btn-info' onclick='ImageCard($uid, 0)'>
+                <input type='button' value='PNG Back' class='btn btn-info' onclick='ImageCard($uid, 1)'>
+                ";
+            break;
+    }
+
     $tag = "
     <div align='center'>
-        <input type='button' value='Delete' class='btn btn-danger short' onclick='DeleteCard($uid, $card_type)'>
-        <a class='btn btn-success short' href='?page=add&uid=$uid'>Edit</a>
+        <input type='button' value='X' class='btn btn-danger card-button' onclick='DeleteCard($uid, $card_type)'>
+        <a class='btn btn-success card-button' href='?page=add&uid=$uid'>Edit</a>
+        $image_btn
         <span><b>$uid</b></span>
     </div>
     ";
@@ -483,6 +512,40 @@ if(isset($_POST['functionname'])){
 
 
 
+/**
+ * Used in array_filter. 
+ * Keep all cards that have at least one bonus.
+ */
+function filter_sub_bonus($card){
+    return count($card['bonuses']) > 0;
+}
+
+/**
+ * Used in array_filter. 
+ * Keep all cards that have at least one smear
+ */
+function filter_sub_smear($card){
+    return isset($card['smears']) && count($card['smears']) > 0;
+}
+
+/**
+ * Used in array_filter.
+ * Keeps all the cards with an ID greater than this value.
+ */
+function filter_greater_than_id($card){
+    global $greater_than_id;
+    return $card['uid'] > $greater_than_id;
+}
+
+/**
+ * Used in array_filter
+ * Keeps the card with the given ID.
+ */
+function filter_id_is($card){
+    global $id_is;
+    return $card['uid'] == $id_is;
+}
+
 /*
 Check for Search queries.
 -   Search position text, question text, and answer text. Using the same search field.
@@ -491,7 +554,13 @@ Check for Search queries.
 */
 $category = isset($_GET['category']) ? $_GET['category'] : "";
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+$id_is = isset($_GET['id_is']) ? $_GET['id_is'] : "";
+$greater_than_id = isset($_GET['greater-than-id']) ? $_GET['greater-than-id'] : "";
 $card_type = isset($_GET['card_type']) ? $_GET['card_type'] : "";
+$sub_type = isset($_GET['subtype']) ? $_GET['subtype'] : "";
+
+$findBonus = $sub_type == "Bonus";
+$findSmear = $sub_type == "Smear";
 
 if(isset($_GET["search"]))
 {
@@ -505,6 +574,21 @@ if(isset($_GET["search"]))
         $positions = array();
     }
 
+
+
+    //Return the cards with the given ID.
+    if(!empty($id_is)){
+        $positions = array_filter($positions, "filter_id_is");
+        $questions = array_filter($questions, "filter_id_is");
+    }
+
+    //Return the Cards with the ID > the given value:
+    if(!empty($greater_than_id)){
+        $positions = array_filter($positions, "filter_greater_than_id");
+        $questions = array_filter($questions, "filter_greater_than_id");
+    }
+    
+
     //Search for Bonus or Smear categories
     if(isset($_GET['category']) && !empty($_GET['category'])){
 
@@ -513,6 +597,7 @@ if(isset($_GET["search"]))
 
         //Need to check both Bonuses and Smears for the category:
         foreach($positions as $pos){
+            
             foreach($pos['bonuses'] as $obj){
                 if($obj['id'] == $category){
                     $filtered_positions[] = $pos;
@@ -549,14 +634,14 @@ if(isset($_GET["search"]))
                         break;
                     }
                 }
-
+                
                 foreach($answer['smears'] as $obj){
                     if($obj['id'] == $category){
                         $filtered_questions[] = $que;
                         $que_added = true;
                         break;
                     }
-                }
+                }                
 
                 //If the question was added once, break out of the answers loop.
                 if($que_added) break;
@@ -610,6 +695,32 @@ if(isset($_GET["search"]))
         $questions = $filtered_questions;
     }
 
+
+    /*
+    Filter the cards for their sub types:
+    Question cards are not included because they do not have sub types.
+    */
+    if($findBonus){
+        $positions = array_filter($positions, "filter_sub_bonus");
+    }
+    if($findSmear){
+        $positions = array_filter($positions, "filter_sub_smear");
+    }
+
 }
 
+//Sort the cards by their UID.
+usort($positions, "sort_uid");
+usort($questions, "sort_uid");
+
+//Encode these to JSON:
+$json_positions = json_encode($positions);
+$json_questions = json_encode($questions);
+
 ?>
+
+<script>
+    //Set these as JavaScript variables:
+    var positions = <?=$json_positions?>;
+    var questions = <?=$json_questions?>;
+</script>

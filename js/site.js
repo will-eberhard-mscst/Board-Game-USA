@@ -1,3 +1,5 @@
+
+
 /*
 JS for add.php------------------------------------------------------------
 */
@@ -81,7 +83,7 @@ function AddSmear(position_no){
 /*
 Call the add position function from PHP
 */
-function AddPosition(position_no){
+async function AddPosition(position_no){
 
     $.ajax({
         type: "POST",
@@ -163,7 +165,7 @@ $('#question').click(function() {
  /*
  -----------------------------------------album.php JS -------------------------------------------------
  */
-/*
+/**
 Delete a Card permanently
 */
 function DeleteCard(uid, card_type){
@@ -202,6 +204,144 @@ function DeleteCard(uid, card_type){
     }
 }
 
+
+/**
+ * Converts the given Card UID to an Image file.
+ * http://html2canvas.hertzen.com/configuration/
+ * @param {int} uid 
+ * @param {int} i The index of the element to return. Enter 0 for the first element.
+ * @returns 
+ */
+async function cardToImage(uid, i){
+
+    var elm = $('#'+ uid +' .card');
+
+    var options ={
+        backgroundColor: null //transparent background
+        ,scale: 8 //Image scaling/resolution
+    }
+
+    var image = await html2canvas(elm[i], options).then(image => {
+        return image;
+    });
+
+    return image;
+}
+
+/**
+ * Allows the user to download a single card as an Image:
+ * Enter 0 for Front, enter 1 for Back of the card.
+ */
+async function ImageCard(uid, i){
+
+    var image = await cardToImage(uid, i);
+
+    var type = i == 0 ? "front" : "back";
+        
+    //Convert the image to a PNG file and download it.
+    var a = document.createElement('a');
+    // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+    a.href = image.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    a.download = 'card'+ uid + type+'.png';
+    a.click();
+}
+
+
+/**
+ * Returns a Zip file containing all the cards that the user has searched for.
+ * @returns JSZip
+ */
+async function ZipAll(){
+
+    var zip = new JSZip();
+
+    //Show the Download Progress area:
+    $("#download-progress").removeAttr("hidden");
+
+    //Set the Deonimator's value:
+    var denom = positions.length + questions.length;
+    $("#progress-denominator").text(denom);
+
+    //Get the Numerator:
+    var numer = $("#progress-numerator");
+    //set as 0 to start:
+    numer.text(0);
+
+    //number of cards downloaded:
+    var count = 0;
+
+    //Download all the Position cards on screen:
+    var len = positions.length;
+    for(var i = 0; i < len; i++){
+
+        var uid = positions[i].uid;
+        //console.log("card" + uid);
+
+        //Convert the card to an Image:
+        var image = await cardToImage(uid, 0);
+
+        //Get the Blob from the Image:
+        var blob = await new Promise(resolve => image.toBlob(resolve) );
+        //saves the blob as a PNG:
+        await zip.file("card"+ uid +".png", blob);
+
+        //Show the number of cards downloaded:
+        count++;
+        numer.text(count);
+    }
+
+    //Download all the Question cards on screen:
+    var len = questions.length;
+    for(var i = 0; i < len; i++){
+
+        var uid = questions[i].uid;
+        //console.log("card" + uid);
+
+        //Zip the front of the card:
+        //Convert the card to an Image:
+        var image = await cardToImage(uid, 0);
+
+        //Get the Blob from the Image:
+        var blob = await new Promise(resolve => image.toBlob(resolve) );
+        //saves the blob as a PNG:
+        await zip.file("card"+ uid +"-front.png", blob);
+
+
+        //Zip the back of the card:
+        //Convert the card to an Image:
+        var image = await cardToImage(uid, 1);
+
+        //Get the Blob from the Image:
+        var blob = await new Promise(resolve => image.toBlob(resolve) );
+        //saves the blob as a PNG:
+        await zip.file("card"+ uid +"-back.png", blob);
+
+        //Show the number of cards downloaded:
+        count++;
+        numer.text(count);
+    }
+
+    return zip;
+}
+
+/**
+ * Download all the cards that the user has searched for as PNGs
+ */
+async function DownloadAll(){
+
+    var zip = await ZipAll();
+
+    await zip.generateAsync({type:"blob"}).then(
+        function (blob) { // 1) generate the zip file
+            saveAs(blob, "cards.zip");// 2) trigger the download
+        }, 
+        function (err) {
+            jQuery("#blob").text(err);
+        }
+    );
+}
+
+
 /*
 --------------------------------stats.php---------------------------
 */
@@ -217,3 +357,5 @@ $('table.smear').dataTable({
     //sort by second column by default:
     order: [[2,'desc']]
 });
+
+

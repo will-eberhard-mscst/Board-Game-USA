@@ -10,8 +10,27 @@ Feature:
 -   Delete a card
 -   Edit a Card
     -   Both Position Cards and Question Cards.
-*/
 
+Convert cards to PNG/JPG: 
+-   Remove card border
+-   Remove text background color
+-   For the entire card use a given SVG for the image background
+-   Size: W 10.88" X H 14.8"
+*/
+// $my_img = imagecreate( 200, 80 );
+// $background = imagecolorallocate( $my_img, 0, 0, 255 );
+// $text_color = imagecolorallocate( $my_img, 255, 255, 0 );
+// $line_color = imagecolorallocate( $my_img, 128, 255, 0 );
+// imagestring( $my_img, 4, 30, 25, "thesitewizard.com", $text_color );
+// imagesetthickness ( $my_img, 5 );
+// imageline( $my_img, 30, 45, 165, 45, $line_colour );
+
+// header( "Content-type: image/png" );
+// imagepng( $my_img );
+// imagecolordeallocate( $line_color );
+// imagecolordeallocate( $text_color );
+// imagecolordeallocate( $background );
+// imagedestroy( $my_img );
 
 
 /**
@@ -107,9 +126,10 @@ function DrawQuestionCard($question){
     ";
 }
 
+
 ?>
 
-<div class='album'>
+<div class='album' id="capture">
     <div class='container'>
         <h2 class="alert alert-primary">Card Album</h2>
 
@@ -120,6 +140,12 @@ function DrawQuestionCard($question){
 
                 <div><label for='keyword'>Keyword:</label></div>
                 <div><input type='text' name='keyword' value='<?=$keyword?>'></div>
+
+                <div><label for='id_is'>ID is:</label></div>
+                <div><input type='number' name='id_is' class='long' value='<?=$id_is?>'></div>
+
+                <div><label for='greater-than-id'>ID Greater Than:</label></div>
+                <div><input type='number' name='greater-than-id' class='long' value='<?=$greater_than_id?>'></div>
 
                 <div><label for='category'>Category:</label></div>
                 <div>
@@ -138,11 +164,26 @@ function DrawQuestionCard($question){
                     <label for="question2">Question</label>                
                 </div>
 
+                <div><label>Sub Type:</label></div>
+                <div>
+                    <input type="radio" name="subtype" id="subboth" value="Both" checked>
+                    <label for="subboth">Both</label> 
+                    <input type="radio" name="subtype" id="bonus" value="Bonus" <?php if($sub_type == "Bonus") echo "checked"; ?> >
+                    <label for="bonus">Bonus</label>
+                    <input type="radio" name="subtype" id="smear" value="Smear" <?php if($sub_type == "Smear") echo "checked"; ?>>
+                    <label for="smear">Smear</label>                
+                </div>
+
                 <div>
                     <input type="submit" name='search' value="Search" class='btn btn-info short'>
-                    <input type='submit'class="btn btn-warning short" name='search' value='Print' formaction="/cardmaker/print.php">
+                    <input type='submit' class="btn btn-warning short" name='search' value='Print' formaction="/cardmaker/print.php">
+                    <input type='button' class='btn btn-danger' value='Download' onclick='DownloadAll()'>
                 </div>
             </form>
+
+            <div id="download-progress" hidden>
+                Downloading Cards... <span id="progress-numerator"></span> / <span id="progress-denominator"></span>
+            </div>
         </div>
 
         <div class=''>
