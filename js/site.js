@@ -1,3 +1,5 @@
+
+
 /*
 JS for add.php------------------------------------------------------------
 */
@@ -253,16 +255,70 @@ async function ZipAll(){
 
     var zip = new JSZip();
 
-    for(var i = 31; i < 40; i++){
-        console.log("loop" + i);
+    //Show the Download Progress area:
+    $("#download-progress").removeAttr("hidden");
+
+    //Set the Deonimator's value:
+    var denom = positions.length + questions.length;
+    $("#progress-denominator").text(denom);
+
+    //Get the Numerator:
+    var numer = $("#progress-numerator");
+    //set as 0 to start:
+    numer.text(0);
+
+    //number of cards downloaded:
+    var count = 0;
+
+    //Download all the Position cards on screen:
+    var len = positions.length;
+    for(var i = 0; i < len; i++){
+
+        var uid = positions[i].uid;
+        //console.log("card" + uid);
 
         //Convert the card to an Image:
-        var image = await cardToImage(i, 0);
+        var image = await cardToImage(uid, 0);
 
         //Get the Blob from the Image:
         var blob = await new Promise(resolve => image.toBlob(resolve) );
         //saves the blob as a PNG:
-        await zip.file("card"+ i +".png", blob);
+        await zip.file("card"+ uid +".png", blob);
+
+        //Show the number of cards downloaded:
+        count++;
+        numer.text(count);
+    }
+
+    //Download all the Question cards on screen:
+    var len = questions.length;
+    for(var i = 0; i < len; i++){
+
+        var uid = questions[i].uid;
+        //console.log("card" + uid);
+
+        //Zip the front of the card:
+        //Convert the card to an Image:
+        var image = await cardToImage(uid, 0);
+
+        //Get the Blob from the Image:
+        var blob = await new Promise(resolve => image.toBlob(resolve) );
+        //saves the blob as a PNG:
+        await zip.file("card"+ uid +"-front.png", blob);
+
+
+        //Zip the back of the card:
+        //Convert the card to an Image:
+        var image = await cardToImage(uid, 1);
+
+        //Get the Blob from the Image:
+        var blob = await new Promise(resolve => image.toBlob(resolve) );
+        //saves the blob as a PNG:
+        await zip.file("card"+ uid +"-back.png", blob);
+
+        //Show the number of cards downloaded:
+        count++;
+        numer.text(count);
     }
 
     return zip;

@@ -713,4 +713,14 @@ if(isset($_GET["search"]))
 usort($positions, "sort_uid");
 usort($questions, "sort_uid");
 
+//Encode these to JSON:
+$json_positions = json_encode($positions);
+$json_questions = json_encode($questions);
+
 ?>
+
+<script>
+    //Set these as JavaScript variables:
+    var positions = <?=$json_positions?>;
+    var questions = <?=$json_questions?>;
+</script>

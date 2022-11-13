@@ -264,11 +264,11 @@ if(isset($_POST["submit"]))
         echo "<div class='alert alert-success'>Card added successfully!</div>";
 
         //If this was an edit, update the page with the current card values OR redirect to Album.
-        if($isEdit){
+        //if($isEdit){
             //redirect to the album page.
-            header("Location: ?page=album");
+            //header("Location: ?page=album");
             //header("Location: ?page=add&uid=$card_uid");
-        }
+        //}
     }
     else {
         echo "<div class='alert alert-danger'>Uh-Oh! Error when updating json file!</div>";
