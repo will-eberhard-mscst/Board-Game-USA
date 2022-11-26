@@ -259,6 +259,8 @@ function GetPositionCardImages(Array $category_array){
         $sign = $positive ? '+' : '&minus;';
         //Add the bad class is the points are negative.
         $bad = $positive ? '' : 'bad';
+        //add _red to the file name:
+        $red = $positive ? '' : '_red';
 
         //Draw a div so each img-block is draw vertically.
         //Start a new Div on each odd number:
@@ -267,7 +269,7 @@ function GetPositionCardImages(Array $category_array){
         $bonus_tag .= '
         <div class="img-block">
            
-            <img class="card-img cat-img '.$bad.'" src="/cardmaker/images/svg/cat_' . $bonus['id'] . '_svg.svg" alt="Card image cap">
+            <img class="card-img cat-img '.$bad.'" src="/cardmaker/images/svg/cat_' . $bonus['id'] . '_svg' . $red . '.svg" alt="Card image cap">
             <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span>
         </div>
         ';
@@ -302,7 +304,7 @@ function GetPositionCard($position){
     if($hasSmears){
         $bonus_tag .= GetPositionCardImages($position['smears']);
         $position_type = 'smear-text';
-        $position_name = '<img class="card-img position-img" src="/cardmaker/images/svg/text_smear.svg" alt="Smear">';
+        $position_name = '<img class="card-img position-img" src="/cardmaker/images/svg/smeargoo.png" alt="Smear">';
     }
 
     $tag = '
@@ -382,9 +384,11 @@ function GetQuestionCardBack($question){
                 $sign = $positive ? '+' : '&minus;';
                 //Add the bad class is the points are negative.
                 $bad = $positive ? '' : 'bad';
+                //add _red to the file name:
+                $red = $positive ? '' : '_red';
                 
                 $bonus_tag .= '
-                <img class="card-img answer-img '. $bad .'" src="/cardmaker/images/svg/cat_' . $bonus['id'] . '_svg.svg" alt="Answer">
+                <img class="card-img answer-img '. $bad .'" src="/cardmaker/images/svg/cat_' . $bonus['id'] . '_svg' . $red . '.svg" alt="Answer">
                 <span class="points '.$bad.'">'. $sign . abs($bonus['points']) . '</span> 
                 ';
             }

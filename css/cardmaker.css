@@ -381,9 +381,9 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 /*Negative points and images will be drawn in red.*/
 .bad{
-  filter: hue-rotate(150deg);
-  color: #007ae5ff;
-}
+  /*filter: hue-rotate(150deg);*/
+  color: #e50000;
+} 
 
 /*Image for the Position Type name. AKA, the Smear Label image.*/
 .print-card .position-img{
