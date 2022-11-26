@@ -387,12 +387,12 @@ input[type='text'], input[type='button'].long, input[type='submit'].long, input[
 
 /*Image for the Position Type name. AKA, the Smear Label image.*/
 .print-card .position-img{
-  height: 5.5mm;
+  height: auto;
   width: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 4.5mm;
+  margin-bottom: 3.5mm;
   width: 50%;
 }
 
