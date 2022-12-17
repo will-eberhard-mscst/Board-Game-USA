@@ -22,14 +22,14 @@ $header_row = "
 Hard Coded values for number of occurences per state.
 */
 $occurances = array(
-    "jus" => 13,
+    "jus" => 14,
     "env" => 10,
     "tra" => 25,
     "job" => 14,
-    "eco" => 21,
+    "eco" => 20,
     "glo" => 10,
-    "wel" => 23,
-    "nat" => 14,
+    "wel" => 24,
+    "nat" => 13,
     "tax" => 17,
     "sec" => 15,
     "pat" => 0
